@@ -2,15 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import {useEffect} from 'react';
+import TicketForm from './component/ticketForm'
 
 function App() {
-
-  useEffect(() => {
-    axios.get('https://localhost:5000/testAPI')
-    .then(response => {
-        console.log(response.data)
-    })
-    }, []);
 
   return (
     <div className="App">
@@ -19,6 +13,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <TicketForm />
         <a
           className="App-link"
           href="https://reactjs.org"
