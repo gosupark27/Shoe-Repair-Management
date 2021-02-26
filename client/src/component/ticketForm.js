@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
 
 
 const TicketForm = () => {
@@ -16,6 +17,17 @@ const TicketForm = () => {
     //     setFirstName(event.target.value);
     //     console.log(event.target);
     //   };
+
+    //Axios Put request 
+    const callApi = () => {
+        //Endpoint to express server 
+        const url = '';
+        //axios.put()
+        const ticketData ={
+            firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
+        }
+        console.log(ticketData);
+    }
 
 
     return (
@@ -46,7 +58,7 @@ const TicketForm = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={callApi}>
                         Create Tickets
             </Button>
                 </Grid>
