@@ -21,12 +21,22 @@ const TicketForm = () => {
     //Axios Put request 
     const callApi = () => {
         //Endpoint to express server 
-        const url = '';
-        //axios.put()
-        const ticketData ={
+        const url = 'http://localhost:5000/testAPI';
+        
+        const ticketData = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
         console.log(ticketData);
+
+        //Use post or put request?
+        axios.put(url, ticketData)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+
     }
 
 
@@ -59,7 +69,7 @@ const TicketForm = () => {
             <Grid container>
                 <Grid item xs={12}>
                     <Button variant="contained" color="primary" onClick={callApi}>
-                        Create Tickets
+                        Create Ticket
             </Button>
                 </Grid>
             </Grid>
