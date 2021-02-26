@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/testDb";
+const url = "mongodb://localhost:27017/ShoeRepairDb";
 
 mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology: true})
 console.log(mongoose.connection.readyState);
@@ -24,6 +24,7 @@ db.on('error', err => {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI');
+var ticketRouter = require('./routes/ticket');
 
 
 var app = express();
@@ -42,6 +43,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
+app.use('/ticket', ticketRouter);
 
 
 // catch 404 and forward to error handler
@@ -49,7 +51,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-//CORS? 
 
 
 // error handler
@@ -63,10 +64,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.put('/testAPI', (req,res) => {
-  console.log('Got body:', req.body);
-  res.sendStatus(200);
-})
+
 
 app.set('port', process.env.PORT || 5000)
 
