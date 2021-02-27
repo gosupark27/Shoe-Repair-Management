@@ -6,29 +6,22 @@ import axios from 'axios';
 
 
 const TicketForm = () => {
-    //useState
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [pickUpDate, setPickUpDate] = useState('')
     const [ticketNumber, setTicketNumber] = useState('')
     const [dropDate, setDropDate] = useState('')
-    // const handleChange = (event) => {
-    //     setFirstName(event.target.value);
-    //     console.log(event.target);
-    //   };
 
-    //Axios Put request 
+    
     const callApi = () => {
-        //Endpoint to express server 
-        const url = 'http://localhost:5000/testAPI';
+        
+        const url = 'http://localhost:5000/ticket';
         
         const ticketData = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
-        console.log(ticketData);
-
-        //Use post or put request?
+        
         axios.put(url, ticketData)
         .then((res) => {
             console.log(res)
