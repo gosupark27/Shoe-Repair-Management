@@ -10,11 +10,10 @@ test('renders TicketForm', () => {
 });
 
 test('callApi is called when button is clicked', () => {
-    const fn = jest.fn();
+    const callApi = jest.fn();
     render(<TicketForm/>)
     const button = screen.getByText('Create Ticket');
-    expect(button).toBeInTheDocument();
-
-    
-
+    button.onclick = callApi;
+     fireEvent.click(button);
+     expect(callApi).toHaveBeenCalled(1);
 })
