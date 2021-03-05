@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import ItemList from './itemList';
 
 
 const TicketForm = () => {
@@ -13,22 +14,22 @@ const TicketForm = () => {
     const [ticketNumber, setTicketNumber] = useState('')
     const [dropDate, setDropDate] = useState('')
 
-    
+
     const callApi = () => {
-        
+
         const url = 'http://localhost:5000/ticket';
-        
+
         const ticketData = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
-        
+
         axios.put(url, ticketData)
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        });
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
 
     }
 
@@ -58,6 +59,11 @@ const TicketForm = () => {
                     <TextField id="outlined-basic" label="Pickup Date" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
                 </Grid>
 
+            </Grid>
+            <Grid container>
+                <Grid item xs={12}>
+                    <ItemList />
+                </Grid>
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
