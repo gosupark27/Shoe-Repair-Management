@@ -7,20 +7,48 @@ import Item from './item';
 
 const ItemList = () => {
     let newId = uuidv4();
-    const [itemList, setItemList] = useState([{id:newId }]);
+    const [itemList, setItemList] = useState([{id:newId, itemName:'', repair:'' }]);
 
     const removeItem = (index) =>{
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
 
-    const saveItem = (saveItem) => {
-        itemList.map(item => (item.id === saveItem.id ? saveItem : item))
+    const saveItemName = (index, value) => {
+        const newItemList = itemList.map((item) => {
+            if(item.id === index)
+            {
+                const updatedItem = {
+                    ...item, 
+                    itemName: value,
+                };
+                return updatedItem;
+            }
+            return item;
+        });
+        setItemList(newItemList)
+        console.log(newItemList);
+    }
+
+    const saveItemRepair = (index, value) => {
+        const newItemList = itemList.map((item) => {
+            if(item.id === index)
+            {
+                const updatedItem = {
+                    ...item, 
+                    repair: value,
+                };
+                return updatedItem;
+            }
+            return item;
+        });
+        setItemList(newItemList)
+        console.log(newItemList);
     }
 
     const addItem = () => { 
         let newId = uuidv4();
-        setItemList([...itemList, {id:newId}])
+        setItemList([...itemList, {id:newId, itemName:'', repair:''}])
         //TODO: Remove 
         console.log(itemList);
      };
@@ -31,7 +59,8 @@ const ItemList = () => {
             <List>
                 {
                     itemList.map(item => (
-                        <Item key={item.id} id={item.id} remove={removeItem}/>
+                        <Item key={item.id} id={item.id} remove={removeItem} saveItemName={saveItemName} 
+                        saveItemRepair = {saveItemRepair}/>
                     ))
                 }
 
