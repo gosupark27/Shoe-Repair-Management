@@ -6,7 +6,6 @@ test('renders TicketForm', () => {
   render(<TicketForm />);
   const firstNameInput = screen.getByLabelText('First Name')
   expect(firstNameInput).toBeInTheDocument();
-
 });
 
 test('callApi is called when button is clicked', () => {
@@ -16,7 +15,4 @@ test('callApi is called when button is clicked', () => {
     button.onclick = callApi;
      fireEvent.click(button);
      expect(callApi).toHaveBeenCalled(1);
-
-    
-
 })
