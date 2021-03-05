@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button';
 import { useId } from "react-id-generator";
+import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
 
 const ItemList = () => {
-    const [itemList, setItemList] = useState([{id:0 }]);
-
-    //Get new id only when component is rendered...
-    const id = useId();
+    let newId = uuidv4();
+    const [itemList, setItemList] = useState([{id:newId }]);
 
     const removeItem = () =>{
 
@@ -19,7 +18,10 @@ const ItemList = () => {
         itemList.map(item => (item.id === saveItem.id ? saveItem : item))
     }
 
-    const addItem = () => { setItemList([...itemList, {}]) };
+    const addItem = () => { 
+        let newId = uuidv4();
+        setItemList([...itemList, {id:newId}])
+     };
 
 
     return (
@@ -27,13 +29,13 @@ const ItemList = () => {
             <List>
                 {
                     itemList.map(item => (
-                        <Item id={id}/>
+                        <Item key={item.id} remove={removeItem}/>
                     ))
                 }
 
 
             </List>
-            <Button variant="contained" color="primary" onClick= {()=>{ addItem(); saveItem() }}>
+            <Button variant="contained" color="primary" onClick= {()=>{ addItem() }}>
                 Add Item
         </Button>
         </div>
