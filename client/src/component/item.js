@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
-const Item = ({ remove, setItem }) => {
+const Item = ({ remove, id, setItem }) => {
     const [itemName, setItemName] = useState('');
     const [repair, setRepair] = useState('');
 
@@ -21,10 +21,10 @@ const Item = ({ remove, setItem }) => {
                         <TextField id="outlined-basic" label="Repair" variant="outlined" value={repair} onChange={e => setRepair(e.target.value)} />
                     </Grid>
                     <Grid item xs={4}>
-                        <DeleteIcon style={{ color: 'white' }} onClick={remove}/>
+                        <DeleteIcon style={{ color: 'white' }} onClick={() => remove(id)}/>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid>)
         </ListItem>
     )
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button';
-import { useId } from "react-id-generator";
 import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
@@ -10,8 +9,9 @@ const ItemList = () => {
     let newId = uuidv4();
     const [itemList, setItemList] = useState([{id:newId }]);
 
-    const removeItem = () =>{
-
+    const removeItem = (index) =>{
+        const newItemList = itemList.filter(item => item.id !== index);
+        setItemList(newItemList);
     }
 
     const saveItem = (saveItem) => {
@@ -21,6 +21,8 @@ const ItemList = () => {
     const addItem = () => { 
         let newId = uuidv4();
         setItemList([...itemList, {id:newId}])
+        //TODO: Remove 
+        console.log(itemList);
      };
 
 
@@ -29,7 +31,7 @@ const ItemList = () => {
             <List>
                 {
                     itemList.map(item => (
-                        <Item key={item.id} remove={removeItem}/>
+                        <Item key={item.id} id={item.id} remove={removeItem}/>
                     ))
                 }
 
