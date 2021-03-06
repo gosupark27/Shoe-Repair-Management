@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
 
-const ItemList = () => {
-    let newId = uuidv4();
+const ItemList = ({ticketItems}) => {
     const [itemList, setItemList] = useState([]);
 
     const removeItem = (index) =>{
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
+
+    //useEffect to keep save the most recent changes made to itemList? 
+    //useEffect(console.log(itemList),[itemList]);
+    useEffect(() => {ticketItems(itemList)}, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
@@ -40,8 +43,6 @@ const ItemList = () => {
                         />
                     ))
                 }
-
-
             </List>
             <Button variant="contained" color="primary" onClick= {()=>{ addItem() }}>
                 Add Item

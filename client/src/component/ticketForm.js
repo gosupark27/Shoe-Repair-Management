@@ -13,6 +13,11 @@ const TicketForm = () => {
     const [pickUpDate, setPickUpDate] = useState('')
     const [ticketNumber, setTicketNumber] = useState('')
     const [dropDate, setDropDate] = useState('')
+    const [ticketItems, setTicketItems] = useState([]);
+
+    const setItem = (itemList) => {
+        setTicketItems(itemList);
+    }
 
 
     const callApi = () => {
@@ -20,8 +25,10 @@ const TicketForm = () => {
         const url = 'http://localhost:5000/ticket';
 
         const ticketData = {
-            firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
+            firstName, lastName, phone, pickUpDate, ticketNumber, dropDate, ticketItems
         }
+
+        console.log(ticketData);
 
         axios.put(url, ticketData)
             .then((res) => {
@@ -32,10 +39,6 @@ const TicketForm = () => {
             });
 
     }
-
-    //Func that will loop through the itemList and update it w/saved info 
-
-
     return (
         <Grid container>
             <Grid container>
@@ -64,7 +67,7 @@ const TicketForm = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <ItemList />
+                    <ItemList ticketItems={setItem}/>
                 </Grid>
             </Grid>
             <Grid container>
