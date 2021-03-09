@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
 
+
 const ItemList = ({ticketItems}) => {
     const [itemList, setItemList] = useState([]);
 
@@ -13,9 +14,11 @@ const ItemList = ({ticketItems}) => {
         setItemList(newItemList);
     }
 
+
+
     //useEffect to keep save the most recent changes made to itemList? 
     //useEffect(console.log(itemList),[itemList]);
-    useEffect(() => {ticketItems(itemList)}, [itemList])
+    useEffect(() => {ticketItems(itemList); console.log(itemList[0].itemName)}, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
@@ -26,6 +29,7 @@ const ItemList = ({ticketItems}) => {
             return item;
         });
         setItemList(newItemList)
+
     }
 
     const addItem = () => { 
