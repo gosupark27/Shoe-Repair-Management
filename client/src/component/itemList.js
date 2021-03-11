@@ -14,7 +14,7 @@ const ItemList = ({ticketItems}) => {
         setItemList(newItemList);
     }
     
-    useEffect(() => {ticketItems(itemList); }, [itemList])
+    useEffect(() => {ticketItems(itemList);}, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
@@ -25,7 +25,6 @@ const ItemList = ({ticketItems}) => {
             return item;
         });
         setItemList(newItemList)
-
     }
 
     const addItem = () => { 

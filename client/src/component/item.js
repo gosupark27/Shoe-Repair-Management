@@ -10,7 +10,7 @@ const Item = ({ remove, id, saveItem }) => {
     const [repairDesc, setRepairDesc] = useState('');
 
     const debounceCall = useCallback(
-        debounce((id, value, name) => {saveItem(id, value, name)}, 500, [])
+        debounce((id, value, name) => {saveItem(id, value, name)}, 500), []
     )
 
     const itemNameChange = (e) => {
@@ -26,7 +26,6 @@ const Item = ({ remove, id, saveItem }) => {
     }
 
     return (
-
         <ListItem>
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>

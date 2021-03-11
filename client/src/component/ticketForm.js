@@ -27,9 +27,7 @@ const TicketForm = () => {
         const ticketData = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate, ticketItems
         }
-
-        console.log(ticketData);
-
+        
         axios.put(url, ticketData)
             .then((res) => {
                 console.log(res)
@@ -37,33 +35,28 @@ const TicketForm = () => {
             .catch((err) => {
                 console.log(err)
             });
-
     }
     return (
         <Grid container>
             <Grid container>
                 <Grid item xs={12} >
-                    <TextField id="outlined-basic" label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
-                    <TextField id="outlined-basic" label="Drop Date" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
+                    <TextField label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
+                    <TextField label="Drop Date" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
+                </Grid>
+            </Grid>
+            <Grid container>
+                <Grid item xs={12}>
+                    <TextField label="First Name" variant="outlined" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
+                    <TextField label="Last Name" variant="outlined" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </Grid>
             </Grid>
             <Grid container>
 
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="First Name" variant="outlined" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-
-                    <TextField id="outlined-basic" label="Last Name" variant="outlined" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <TextField label="Phone" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <TextField label="Pickup Date" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
                 </Grid>
-
-            </Grid>
-            <Grid container>
-
-                <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Phone" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                    <TextField id="outlined-basic" label="Pickup Date" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
-                </Grid>
-
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
@@ -77,7 +70,6 @@ const TicketForm = () => {
             </Button>
                 </Grid>
             </Grid>
-
         </Grid>
     )
 
