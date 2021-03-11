@@ -13,7 +13,7 @@ const ItemList = ({ticketItems}) => {
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
-    //if(itemList.length !==0){console.log(itemList[0].itemName, itemList[0].repair)}
+    
     useEffect(() => {ticketItems(itemList); }, [itemList])
 
     const saveItem = (index, value, _prop) => {
