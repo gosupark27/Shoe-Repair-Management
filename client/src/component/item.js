@@ -16,13 +16,13 @@ const Item = ({ remove, id, saveItem }) => {
     const itemNameChange = (e) => {
         const itemNameInput = e.target.value;
         setItemName(itemNameInput);
-        debounceCall(id, itemName, 'itemName');
+        debounceCall(id, itemNameInput, 'itemName');
     }
 
     const repairDescChange = (e) => {
         const repairDescInput = e.target.value;
         setRepairDesc(repairDescInput);
-        debounceCall(id, repairDesc, 'repair');
+        debounceCall(id, repairDescInput, 'repair');
     }
 
     return (
