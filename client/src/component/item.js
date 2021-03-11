@@ -15,11 +15,11 @@ const Item = ({ remove, id, saveItemName, saveItem }) => {
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
                     <Grid item xs={4}>
-                        <TextField id="outlined-basic" label="Item Name" variant="outlined" value={itemName} onChange={e => setItemName(e.target.value)}
+                        <TextField label="Item Name" variant="outlined" value={itemName} onChange={e => setItemName(e.target.value)}
                         onBlur={() => saveItem(id, itemName, 'itemName')} />
                     </Grid>
                     <Grid item xs={4}>
-                        <TextField id="outlined-basic" label="Repair" variant="outlined" value={repairDesc} onChange={e => setRepairDesc(e.target.value)}
+                        <TextField label="Repair" variant="outlined" value={repairDesc} onChange={e => setRepairDesc(e.target.value)}
                         onBlur={() => saveItem(id, repairDesc, 'repair')} />
                     </Grid>
                     <Grid item xs={4}>

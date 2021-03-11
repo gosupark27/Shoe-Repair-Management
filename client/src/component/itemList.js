@@ -15,7 +15,7 @@ const ItemList = ({ticketItems}) => {
 
     //useEffect to keep save the most recent changes made to itemList? 
     //useEffect(console.log(itemList),[itemList]);
-    useEffect(() => {ticketItems(itemList)}, [itemList])
+    useEffect(() => {ticketItems(itemList); if(itemList.length !== 0){console.log(itemList[0].itemName, itemList[0].repair)}}, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
@@ -30,7 +30,7 @@ const ItemList = ({ticketItems}) => {
 
     const addItem = () => { 
         let newId = uuidv4();
-        setItemList([...itemList, {id:newId, itemName:'new name', repair:'new repair'}])
+        setItemList([{id:newId, itemName:'new name', repair:'new repair'}])
      };
 
 
