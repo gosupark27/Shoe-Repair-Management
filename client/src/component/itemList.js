@@ -13,12 +13,8 @@ const ItemList = ({ticketItems}) => {
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
-
-
-
-    //useEffect to keep save the most recent changes made to itemList? 
-    //useEffect(console.log(itemList),[itemList]);
-    useEffect(() => {ticketItems(itemList); console.log(itemList[0].itemName)}, [itemList])
+    //if(itemList.length !==0){console.log(itemList[0].itemName, itemList[0].repair)}
+    useEffect(() => {ticketItems(itemList); }, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
