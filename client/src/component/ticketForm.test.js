@@ -1,18 +1,22 @@
-import { render, screen, fireEvent} from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TicketForm from './ticketForm';
 
+describe('ticketForm test', () => {
 
-test('renders TicketForm', () => {
-  render(<TicketForm />);
-  const firstNameInput = screen.getByLabelText('First Name')
-  expect(firstNameInput).toBeInTheDocument();
-});
+  test('renders TicketForm', () => {
+    render(<TicketForm />);
+    const firstNameInput = screen.getByLabelText('First Name')
+    expect(firstNameInput).toBeInTheDocument();
+  });
 
-test('callApi is called when button is clicked', () => {
+  test('callApi is called when button is clicked', () => {
     const callApi = jest.fn();
-    render(<TicketForm/>)
+    render(<TicketForm />)
     const button = screen.getByText('Create Ticket');
     button.onclick = callApi;
-     fireEvent.click(button);
-     expect(callApi).toHaveBeenCalled(1);
-})
+    fireEvent.click(button);
+    expect(callApi).toHaveBeenCalled(1);
+  });
+});
+
+
