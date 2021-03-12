@@ -14,7 +14,7 @@ const ItemList = ({ticketItems}) => {
         setItemList(newItemList);
     }
     
-    useEffect(() => {ticketItems(itemList);}, [itemList])
+    useEffect(() => {ticketItems(itemList)}, [itemList])
 
     const saveItem = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
@@ -29,7 +29,7 @@ const ItemList = ({ticketItems}) => {
 
     const addItem = () => { 
         let newId = uuidv4();
-        setItemList([...itemList, {id:newId, itemName:'new name', repair:'new repair'}])
+        setItemList([{id:newId, itemName:'new name', repair:'new repair'}])
      };
 
 
