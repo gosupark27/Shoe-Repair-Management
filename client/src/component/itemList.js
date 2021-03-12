@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
 
-
 const ItemList = ({ticketItems}) => {
     const [itemList, setItemList] = useState([]);
 
@@ -13,10 +12,10 @@ const ItemList = ({ticketItems}) => {
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
-    
+
     useEffect(() => {ticketItems(itemList)}, [itemList])
 
-    const saveItem = (index, value, _prop) => {
+    const updateItemList = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {
             if(item.id === index)
             {
@@ -29,16 +28,15 @@ const ItemList = ({ticketItems}) => {
 
     const addItem = () => { 
         let newId = uuidv4();
-        setItemList([{id:newId, itemName:'new name', repair:'new repair'}])
+        setItemList([...itemList, {id:newId, itemName:'', repair:''}])
      };
-
 
     return (
         <div>
             <List>
                 {
                     itemList.map(item => (
-                        <Item key={item.id} id={item.id} remove={removeItem} saveItem={saveItem} 
+                        <Item key={item.id} item={item} remove={removeItem} updateItemList={updateItemList} 
                         />
                     ))
                 }

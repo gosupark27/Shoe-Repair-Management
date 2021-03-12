@@ -5,24 +5,22 @@ import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import debounce from 'lodash.debounce';
 
-const Item = ({ remove, id, saveItem }) => {
-    const [itemName, setItemName] = useState('');
-    const [repairDesc, setRepairDesc] = useState('');
+const Item = ({ remove, item, updateItemList }) => {
+    //const [itemName, setItemName] = useState('');
+    //const [repairDesc, setRepairDesc] = useState('');
 
-    const debounceCall = useCallback(
-        debounce((id, value, name) => {saveItem(id, value, name)}, 500), []
-    )
+    // const debounceCall = useCallback(
+    //     debounce((id, value, name) => {saveItem(id, value, name)}, 500), []
+    // )
 
     const itemNameChange = (e) => {
         const itemNameInput = e.target.value;
-        setItemName(itemNameInput);
-        debounceCall(id, itemNameInput, 'itemName');
+        updateItemList(item.id, itemNameInput, 'itemName');
     }
 
     const repairDescChange = (e) => {
         const repairDescInput = e.target.value;
-        setRepairDesc(repairDescInput);
-        debounceCall(id, repairDescInput, 'repair');
+        updateItemList(item.id, repairDescInput, 'repair');
     }
 
     return (
@@ -30,15 +28,15 @@ const Item = ({ remove, id, saveItem }) => {
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
                     <Grid item xs={4}>
-                        <TextField label="Item Name" variant="outlined" value={itemName} onChange={itemNameChange}
+                        <TextField label="Item Name" variant="outlined" value={item.itemName} onChange={itemNameChange}
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <TextField label="Repair" variant="outlined" value={repairDesc} onChange={repairDescChange}
+                        <TextField label="Repair" variant="outlined" value={item.repair} onChange={repairDescChange}
                          />
                     </Grid>
                     <Grid item xs={4}>
-                        <DeleteIcon style={{ color: 'white' }} onClick={() => remove(id)}/>
+                        <DeleteIcon style={{ color: 'white' }} onClick={() => remove(item.id)}/>
                     </Grid>
                 </Grid>
             </Grid>)

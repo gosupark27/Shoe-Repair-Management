@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import ItemList from './itemList';
+import debounce from 'lodash.debounce';
 
 
 const TicketForm = () => {
@@ -20,7 +21,8 @@ const TicketForm = () => {
     }
 
 
-    const callApi = () => {
+
+    const callApi = debounce( () => {
 
         const url = 'http://localhost:5000/ticket';
 
@@ -35,7 +37,9 @@ const TicketForm = () => {
             .catch((err) => {
                 console.log(err)
             });
-    }
+    }, 2000)
+
+    
     return (
         <Grid container>
             <Grid container>
