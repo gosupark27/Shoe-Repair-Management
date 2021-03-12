@@ -3,15 +3,9 @@ import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
-import debounce from 'lodash.debounce';
+
 
 const Item = ({ remove, item, updateItemList }) => {
-    //const [itemName, setItemName] = useState('');
-    //const [repairDesc, setRepairDesc] = useState('');
-
-    // const debounceCall = useCallback(
-    //     debounce((id, value, name) => {saveItem(id, value, name)}, 500), []
-    // )
 
     const itemNameChange = (e) => {
         const itemNameInput = e.target.value;
