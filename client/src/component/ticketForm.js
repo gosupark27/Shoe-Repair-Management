@@ -50,7 +50,7 @@ const TicketForm = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <TextField label="First Name" variant="outlined" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <TextField label="First Name" inputProps={{'data-testid': "first-name"}} variant="outlined" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
                     <TextField label="Last Name" variant="outlined" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </Grid>
