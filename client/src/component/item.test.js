@@ -1,8 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Item from './item';
 
-
-
 describe('item test', () => {
     const remove = jest.fn();
     const update = jest.fn();

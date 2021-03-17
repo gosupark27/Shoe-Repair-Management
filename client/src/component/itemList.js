@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
-
 const ItemList = ({setTicketItems}) => {
     const [itemList, setItemList] = useState([]);
 

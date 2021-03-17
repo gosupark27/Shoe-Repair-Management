@@ -16,5 +16,3 @@ describe('ticketForm test', () => {
     expect(callApi).toHaveBeenCalledTimes(1);
   });
 });
-
-
