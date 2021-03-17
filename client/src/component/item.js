@@ -22,7 +22,7 @@ const Item = ({ remove, item, updateItemList }) => {
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
                     <Grid item xs={4}>
-                        <TextField label="Item Name" variant="outlined" value={item.itemName} onChange={itemNameChange}
+                        <TextField data-testid="nameTxtField" label="Item Name" variant="outlined" value={item.itemName} onChange={itemNameChange}
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -30,7 +30,7 @@ const Item = ({ remove, item, updateItemList }) => {
                          />
                     </Grid>
                     <Grid item xs={4}>
-                        <DeleteIcon style={{ color: 'white' }} onClick={() => remove(item.id)}/>
+                        <DeleteIcon data-testid="delIcon" style={{ color: 'white' }} onClick={() => remove(item.id)}/>
                     </Grid>
                 </Grid>
             </Grid>)
