@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-//import axios from 'axios';
 import API from '../services/API';
 
 
@@ -22,7 +21,6 @@ const TicketForm = () => {
         }
         const myApi = new API({ url })
         myApi.createEntity({ name: 'ticket' })
-        console.log(myApi);
         myApi.endpoints.ticket.create(ticket)
             .then((res) => {
                 console.log(res)
@@ -30,17 +28,6 @@ const TicketForm = () => {
             .catch((err) => {
                 console.log(err)
             });
-
-
-
-        // axios.put(url, ticketData)
-        // .then((res) => {
-        //     console.log(res)
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // });
-
     }
 
 

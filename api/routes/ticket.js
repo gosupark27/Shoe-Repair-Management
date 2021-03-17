@@ -8,7 +8,7 @@ router.put('/', async (req,res) => {
     await Ticket.create(req.body);
   })
 
-//Update Ticket
+// Update Ticket
 router.post('/', async (req,res) => {
   res.sendStatus(200);
   await Ticket.updateOne({id:"id_goes_here"},req.body);
