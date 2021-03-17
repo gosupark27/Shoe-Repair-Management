@@ -1,19 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 var Ticket = require('../models/Ticket');
 
-// Update Ticket 
-//TODO: doesn't update need id??
+// Create Ticket 
 router.put('/', async (req,res) => {
     res.sendStatus(200);
-    await Ticket.update(req.body);
+    await Ticket.create(req.body);
   })
 
-//Create Ticket
+//Update Ticket
 router.post('/', async (req,res) => {
   res.sendStatus(200);
-  await Ticket.create(req.body);
+  await Ticket.updateOne({id:"id_goes_here"},req.body);
 })
 
 module.exports = router;
