@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 
 
-const ItemList = ({ticketItems}) => {
+const ItemList = ({setTicketItems}) => {
     const [itemList, setItemList] = useState([]);
 
     const removeItem = (index) =>{
@@ -13,7 +13,7 @@ const ItemList = ({ticketItems}) => {
         setItemList(newItemList);
     }
 
-    useEffect(() => {ticketItems(itemList)}, [itemList])
+    useEffect(() => {setTicketItems(itemList)}, [itemList])
 
     const updateItemList = (index, value, _prop) => {
         const newItemList = itemList.map((item) => {

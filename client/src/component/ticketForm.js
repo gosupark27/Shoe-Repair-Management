@@ -64,7 +64,7 @@ const TicketForm = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <ItemList ticketItems={setItem}/>
+                    <ItemList setTicketItems={setItem}/>
                 </Grid>
             </Grid>
             <Grid container>
