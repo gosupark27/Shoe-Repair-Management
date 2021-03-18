@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
+import API from '../services/API';
 
 
 const TicketForm = () => {
@@ -13,23 +13,21 @@ const TicketForm = () => {
     const [ticketNumber, setTicketNumber] = useState('')
     const [dropDate, setDropDate] = useState('')
 
-    
     const callApi = () => {
-        
-        const url = 'http://localhost:5000/ticket';
-        
-        const ticketData = {
+        const url = 'http://localhost:5000';
+        const ticket =
+        {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
-        
-        axios.put(url, ticketData)
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-
+        const myApi = new API({ url })
+        myApi.createEntity({ name: 'ticket' })
+        myApi.endpoints.ticket.create(ticket)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
 
