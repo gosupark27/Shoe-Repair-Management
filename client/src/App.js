@@ -1,14 +1,14 @@
 import './App.css';
-import axios from 'axios';
-import {useEffect} from 'react';
 import TicketForm from './component/ticketForm'
+import Login from './component/login'
+
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <TicketForm />
+        <Login />
       </header>
     </div>
   );
