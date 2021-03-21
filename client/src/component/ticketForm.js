@@ -6,7 +6,6 @@ import axios from 'axios';
 import ItemList from './itemList';
 import debounce from 'lodash.debounce';
 
-
 const TicketForm = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -19,8 +18,6 @@ const TicketForm = () => {
     const setItem = (itemList) => {
         setTicketItems(itemList);
     }
-
-
 
     const callApi = debounce( () => {
 
@@ -39,7 +36,6 @@ const TicketForm = () => {
             });
     }, 2000)
 
-    
     return (
         <Grid container>
             <Grid container>
@@ -76,7 +72,6 @@ const TicketForm = () => {
             </Grid>
         </Grid>
     )
-
 }
 
 export default TicketForm;

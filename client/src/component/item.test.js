@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen} from '@testing-library/react';
 import Item from './item';
 
 describe('item test', () => {
@@ -10,15 +10,7 @@ describe('item test', () => {
         repair: ' ',
     }
     render(<Item item={propData} remove={remove} updateItemList={update}/>);
-    const delIcon = screen.getByTestId('delIcon')
-
     test('renders Item', () => {
         expect(screen.getByTestId('nameTxtField')).toBeInTheDocument;
     });
-
-    test('onChange ', () => {
-        delIcon.onclick = remove;
-        fireEvent.click(delIcon);
-        expect(remove).toHaveBeenCalledTimes(1);
-    })
 });
