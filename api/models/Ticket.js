@@ -7,7 +7,8 @@ const TicketSchema = new mongoose.Schema(
         firstName: String, 
         lastName: String, 
         phone: String, 
-        pickUpDate: String
+        pickUpDate: String,
+        ticketItems:[{itemName: String, repair: String}],
     }
 )
 

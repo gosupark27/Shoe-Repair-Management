@@ -26,7 +26,7 @@ const TicketForm = () => {
         const ticketData = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate, ticketItems
         }
-        
+
         axios.put(url, ticketData)
             .then((res) => {
                 console.log(res)
