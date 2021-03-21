@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var { auth } = require("express-openid-connect");
 
 var mongoose = require('mongoose');
 const url = "mongodb://localhost:27017/ShoeRepairDb";
@@ -23,13 +24,11 @@ db.on('error', err => {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testAPIRouter = require('./routes/testAPI');
 var ticketRouter = require('./routes/ticket');
-
 
 var app = express();
 
-// view engine setup
+// view engine setup 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -40,9 +39,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
+app.use(
+  auth({
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    secret: process.env.SESSION_SECRET,
+    authRequired: false,
+    auth0Logout: true,
+  })
+);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/testAPI', testAPIRouter);
 app.use('/ticket', ticketRouter);
 
 
