@@ -4,17 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var dotenv = require('dotenv');
 var { auth } = require("express-openid-connect");
 
-var mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/ShoeRepairDb";
+dotenv.config();
 
-mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology: true})
+
+// Connect to DB
+var mongoose = require('mongoose');
+
+mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser:true, useUnifiedTopology: true})
 console.log(mongoose.connection.readyState);
 
 const db = mongoose.connection;
 db.once('open', _ => {
-  console.log('Database connected', url)
+  console.log('Database connected', process.env.DB_CONNECT)
 })
 
 db.on('error', err => {
@@ -25,6 +29,7 @@ db.on('error', err => {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ticketRouter = require('./routes/ticket');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -38,20 +43,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(cors());
-app.use(
-  auth({
-    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    secret: process.env.SESSION_SECRET,
-    authRequired: false,
-    auth0Logout: true,
-  })
-);
+app.use(express.json());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/ticket', ticketRouter);
+app.use('/api/user', authRouter)
+
 
 
 // catch 404 and forward to error handler
@@ -75,6 +74,17 @@ app.use(function(err, req, res, next) {
 
 
 app.set('port', process.env.PORT || 5000)
+
+app.use(
+  auth({
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    secret: process.env.SESSION_SECRET,
+    authRequired: false,
+    auth0Logout: true,
+  })
+);
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`);
