@@ -9,11 +9,4 @@ describe('itemList test', () => {
     test('renders ItemList', () => {
         expect(itemListBtn).toBeInTheDocument();
     });
-
-    test('addItem is called when button is clicked', () => {
-        // const onClick = jest.fn();
-        // itemListBtn.onclick = onClick;
-        fireEvent.click(itemListBtn);
-        expect(fn).toHaveBeenCalledTimes(1);
-    });
 });

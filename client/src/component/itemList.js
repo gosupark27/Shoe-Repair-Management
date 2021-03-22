@@ -26,8 +26,8 @@ const ItemList = ({setTicketItems}) => {
     }
 
     const addItem = () => { 
-        let newId = uuidv4();
-        setItemList([...itemList, {id:newId, itemName:'', repair:''}])
+        let tempId = uuidv4();
+        setItemList([...itemList, {id:tempId, itemName:'', repair:''}])
      };
 
     return (

@@ -15,7 +15,7 @@ const TicketForm = () => {
     const [dropDate, setDropDate] = useState('')
     const [ticketItems, setTicketItems] = useState([]);
 
-    const setItem = (itemList) => {
+    const setTicketItem = (itemList) => {
         setTicketItems(itemList);
     }
 
@@ -60,7 +60,7 @@ const TicketForm = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <ItemList setTicketItems={setItem}/>
+                    <ItemList setTicketItems={setTicketItem}/>
                 </Grid>
             </Grid>
             <Grid container>
