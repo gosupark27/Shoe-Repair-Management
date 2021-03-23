@@ -36,15 +36,12 @@ const TicketForm = () => {
 
     return (
         <Container maxWidth={'lg'}>
-            <Grid container spacing={0} alignItems="center" justify="center" style={{minHeight:"50vh"}}>
-                <Grid container spacing={0}>
-                    
-                    <TextField id="outlined-basic" label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
-                    
-                    
-                    <TextField id="outlined-basic" label="Drop Date" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
-                    
-
+            <Grid container spacing={0} alignItems="center" justify="center" style={{ minHeight: "50vh" }}>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <TextField id="outlined-basic" label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
+                        <TextField id="outlined-basic" label="Drop Date" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
+                    </Grid>
                 </Grid>
                 <Grid container>
                     <Grid item xs={12}>
