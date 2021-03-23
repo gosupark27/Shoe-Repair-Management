@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 
-
 const TicketForm = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
