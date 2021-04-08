@@ -14,4 +14,7 @@ router.post('/', async (req,res) => {
   await Ticket.updateOne({id:"id_goes_here"},req.body);
 })
 
+// Retrieve tickets
+router.get()
+
 module.exports = router;
