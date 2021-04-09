@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var Ticket = require('../models/Ticket');
+const express = require('express');
+const router = express.Router();
+const Ticket = require('../models/Ticket');
 
 // Create Ticket 
 router.put('/', async (req,res) => {
