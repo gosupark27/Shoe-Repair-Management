@@ -1,6 +1,4 @@
 import './App.css';
-import axios from 'axios';
-import {useEffect} from 'react';
 import TicketForm from './component/ticketForm'
 
 function App() {
