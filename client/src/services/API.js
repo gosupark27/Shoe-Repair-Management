@@ -42,6 +42,6 @@ const del = async (id) => {
     return request
 }
 // To avoid eslint warning: 'Assign object to a variable before exporting as module default' 
-const personService = { getAll, create, update, del, find }
+const ticketService = { getAll, create, update, del, find }
 
-export default personService
+export default ticketService
