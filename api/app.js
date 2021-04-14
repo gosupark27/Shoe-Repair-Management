@@ -6,7 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const usersRouter = require('./routes/customers');
-const ticketRouter = require('./routes/ticket');
+const ticketRouter = require('./routes/tickets');
 
 const app = express();
 app.use(cors({ origin: clientOrigins }));
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet())
 app.use('/users', usersRouter);
-app.use('/ticket', ticketRouter);
+app.use('/api/tickets', ticketRouter);
 app.use('/api/user', authRouter)
 
 
