@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
 import TicketService from '../services/API';
 
 const TicketForm = () => {
@@ -15,20 +14,10 @@ const TicketForm = () => {
     const [dropDate, setDropDate] = useState('')
 
     const callApi = () => {
-
-        const url = 'http://localhost:5000/ticket';
-
-        const ticketData = {
+        const newTicket = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
-
-        axios.put(url, ticketData)
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-            });
+        TicketService.create(newTicket)
     }
 
 
