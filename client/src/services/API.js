@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = '/api/tickets'
+const baseUrl = 'http://localhost:5000/api/tickets'
 
 const getAll = async () => {
     const request = await axios
@@ -19,7 +19,7 @@ const find = async (id) => {
 
 const create = async (newObj) => {
     const request = await axios
-        .post(baseUrl, newObj)
+        .put(baseUrl, newObj)
         .then(response => response.data)
         .catch(error => {
             console.log('Error! Should be instance of error...:', error instanceof Error, typeof error)
@@ -30,7 +30,7 @@ const create = async (newObj) => {
 
 const update = async (id, newObj) => {
     const request = await axios
-        .put(`${baseUrl}/${id}`, newObj)
+        .post(`${baseUrl}/${id}`, newObj)
         .then(response => response.data)
     return request
 }

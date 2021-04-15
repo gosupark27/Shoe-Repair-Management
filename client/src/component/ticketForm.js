@@ -18,6 +18,16 @@ const TicketForm = () => {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
         TicketService.create(newTicket)
+        clearFields()
+    }
+
+    const clearFields = () => {
+        setFirstName('')
+        setLastName('')
+        setPhone('')
+        setPickUpDate('')
+        setDropDate('')
+        setTicketNumber('')
     }
 
 
