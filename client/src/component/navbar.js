@@ -7,7 +7,7 @@ import EditTicket from './editTicket'
 
 
 const Navbar = () => {
-    const routes = ["/login", "/ticket", "/view"]
+    const routes = ["/login", "/ticket", "/view", "/edit"]
 
     return (
         <Router>
@@ -18,6 +18,7 @@ const Navbar = () => {
                             <Tab label="Login" value={routes[0]} component={Link} to={routes[0]} />
                             <Tab label="Create Ticket" value={routes[1]} component={Link} to={routes[1]} />
                             <Tab label="View Tickets" value={routes[2]} component={Link} to={routes[2]} />
+                            <Tab label="Edit Tickets" value={routes[3]} component={Link} to={routes[3]} />
                         </Tabs>
                     </AppBar>
                 </div>

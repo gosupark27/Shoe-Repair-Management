@@ -38,6 +38,7 @@ const TicketForm = () => {
 
     return (
         <Container maxWidth={'lg'}>
+            <h1>Create new ticket</h1>
             <Grid container spacing={0} alignItems="center" justify="center" style={{ minHeight: "50vh" }}>
                 <Grid container>
                     <Grid item xs={12}>
