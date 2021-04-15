@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import TicketService from '../services/API';
+import {useHistory} from 'react-router-dom'
 
 const TicketForm = () => {
     const [firstName, setFirstName] = useState('')
@@ -13,12 +14,16 @@ const TicketForm = () => {
     const [ticketNumber, setTicketNumber] = useState('')
     const [dropDate, setDropDate] = useState('')
 
+    let history = useHistory()
+
     const callApi = () => {
         const newTicket = {
             firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
         }
         TicketService.create(newTicket)
-        clearFields()
+        .then(savedTicket => history.push("/edit", savedTicket))
+        //clearFields()
+        
     }
 
     const clearFields = () => {
