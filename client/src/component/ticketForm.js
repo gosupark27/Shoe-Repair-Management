@@ -20,7 +20,7 @@ const TicketForm = () => {
     let history = useHistory()
     const setTicketItem = (itemList) => {
         setTicketItems(itemList);
-    }
+    }               
     
 
     const callApi = () => {

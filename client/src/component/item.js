@@ -40,12 +40,10 @@ const Item = ({ remove, item, updateItemList }) => {
                 <Grid container item xs={12} spacing={3}>
                     <Grid item xs={4}>
                         <FormControl className={classes.formControl}>
-                            <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                            <InputLabel shrink>
                                 Item
                             </InputLabel>
                             <Select
-                                labelId="demo-simple-select-placeholder-label-label"
-                                id="demo-simple-select-placeholder-label"
                                 value={item.itemName}
                                 onChange={itemNameChange}
                                 displayEmpty
@@ -54,20 +52,18 @@ const Item = ({ remove, item, updateItemList }) => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Men Dress Shoe</MenuItem>
-                                <MenuItem value={20}>Women high heels</MenuItem>
-                                <MenuItem value={30}>Purse</MenuItem>
+                                <MenuItem value={'Men Dress Shoe'}>Men Dress Shoe</MenuItem>
+                                <MenuItem value={'Women high heels'}>Women high heels</MenuItem>
+                                <MenuItem value={'Purse'}>Purse</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
                     <Grid item xs={4}>
                     <FormControl className={classes.formControl}>
-                            <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                            <InputLabel shrink>
                                 Repair
                             </InputLabel>
                             <Select
-                                labelId="demo-simple-select-placeholder-label-label"
-                                id="demo-simple-select-placeholder-label"
                                 value={item.repair}
                                 onChange={repairDescChange}
                                 displayEmpty
@@ -76,9 +72,9 @@ const Item = ({ remove, item, updateItemList }) => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Half Sole</MenuItem>
-                                <MenuItem value={20}>Heels</MenuItem>
-                                <MenuItem value={30}>Clean</MenuItem>
+                                <MenuItem value={'Half Sole'}>Half Sole</MenuItem>
+                                <MenuItem value={'Heels'}>Heels</MenuItem>
+                                <MenuItem value={'Clean'}>Clean</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
