@@ -4,17 +4,27 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import TicketForm from './ticketForm';
 import Login from './login';
 import EditTicket from './editTicket'
+import {makeStyles} from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+    root:{
+        flexDirection:'column',
+        color:'fff'
+    }
+})
 
 
 const Navbar = () => {
     const routes = ["/login", "/ticket", "/view", "/edit"]
+    const classes = useStyles()
+
 
     return (
         <Router>
             <Route path="/" render={(history) => (
                 <div>
                     <AppBar>
-                        <Tabs value={history.location.pathname !== '/' ? history.location.pathname : false}>  
+                        <Tabs className={classes.root} value={history.location.pathname !== '/' ? history.location.pathname : false}>  
                             <Tab label="Login" value={routes[0]} component={Link} to={routes[0]} />
                             <Tab label="Create Ticket" value={routes[1]} component={Link} to={routes[1]} />
                             <Tab label="View Tickets" value={routes[2]} component={Link} to={routes[2]} />

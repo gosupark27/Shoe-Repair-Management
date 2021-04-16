@@ -5,45 +5,42 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import TicketService from '../services/API';
 import {useHistory} from 'react-router-dom'
+import ItemList from './itemList';
 
 const TicketForm = () => {
+    const date = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
-    const [pickUpDate, setPickUpDate] = useState('')
+    const [pickUpDate, setPickUpDate] = useState(date.toString())
     const [ticketNumber, setTicketNumber] = useState('')
-    const [dropDate, setDropDate] = useState('')
+    const [dropDate, setDropDate] = useState(date.toString())
+    const [ticketItems, setTicketItems] = useState([]);
 
     let history = useHistory()
+    const setTicketItem = (itemList) => {
+        setTicketItems(itemList);
+    }
+    
 
     const callApi = () => {
         const newTicket = {
-            firstName, lastName, phone, pickUpDate, ticketNumber, dropDate
+            firstName, lastName, phone, pickUpDate, ticketNumber, dropDate, ticketItems
         }
         TicketService.create(newTicket)
-        .then(savedTicket => history.push("/edit", savedTicket))
-        //clearFields()
+        .then(savedTicket => {
+            return history.push("/edit", savedTicket)
+        })
         
     }
 
-    const clearFields = () => {
-        setFirstName('')
-        setLastName('')
-        setPhone('')
-        setPickUpDate('')
-        setDropDate('')
-        setTicketNumber('')
-    }
-
-
     return (
         <Container maxWidth={'lg'}>
-            <h1>Create new ticket</h1>
             <Grid container spacing={0} alignItems="center" justify="center" style={{ minHeight: "50vh" }}>
                 <Grid container>
                     <Grid item xs={12}>
                         <TextField label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
-                        <TextField label="Drop Date" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
+                        <TextField label="Drop Date" type="datetime-local" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -57,9 +54,14 @@ const TicketForm = () => {
 
                     <Grid item xs={12}>
                         <TextField label="Phone" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                        <TextField label="Pickup Date" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
+                        <TextField label="Pickup Date" type="datetime-local" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
                     </Grid>
                 </Grid>
+                <Grid container>
+                <Grid item xs={12}>
+                    <ItemList setTicketItems={setTicketItem}/>
+                </Grid>
+            </Grid>
                 <Grid container>
                     <Grid item xs={12}>
                         <Button variant="contained" color="primary" onClick={callApi}>
