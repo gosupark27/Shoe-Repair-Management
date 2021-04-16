@@ -7,16 +7,17 @@ const Ticket = require('../models/Ticket');
 router.put('/', async (req, res) => {
   const body = req.body
   const ticket = new Ticket({
-    // ticketNum: String,
-    dropDate: req.dropDate,
-    firstName: req.firstName,
-    lastName: req.lastName,
-    phone: req.phone,
-    pickUpDate: req.pickUpDate
+    ticketNum: body.ticketNumber,
+    dropDate: body.dropDate,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    phone: body.phone,
+    pickUpDate: body.pickUpDate,
+    ticketItems:body.ticketItems
   })
   ticket.save()
-  .then(() => res.sendStatus(200).json(ticket))
-  .catch(error => next(error))
+  .then(() => res.status(200).json(ticket))
+  .catch(error => console.log(error))
 })
 
 // Update Ticket
@@ -27,6 +28,6 @@ router.post('/', async (req, res) => {
 })
 
 // Retrieve tickets
-router.get()
+//router.get()
 
 module.exports = router;
