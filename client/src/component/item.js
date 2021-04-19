@@ -64,10 +64,8 @@ const Item = ({ remove, item, updateItemList }) => {
     }
 
     return (
-        <ListItem>
-            <Grid container spacing={1}>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={4}>
+                <Grid container xs={12} spacing={6} alignItems='center' justify='center'>
+                    <Grid item>
                         <FormControl className={classes.formControl}>
                             <InputLabel shrink>
                                 Item
@@ -101,7 +99,7 @@ const Item = ({ remove, item, updateItemList }) => {
                             </Select>
                         </FormControl>
                     </Grid>
-                        <Grid item xs={4}>
+                        <Grid item>
                             <FormControl className={classes.formControl}>
                                 <InputLabel shrink>
                                     Repair
@@ -126,12 +124,10 @@ const Item = ({ remove, item, updateItemList }) => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item>
                             <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(item.id)} />
                         </Grid>
                     </Grid>
-                </Grid>)
-        </ListItem>
     )
 }
 

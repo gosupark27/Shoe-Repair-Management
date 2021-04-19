@@ -60,8 +60,8 @@ const TicketForm = () => {
                         <TextField label="Pickup Date" type="datetime-local" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
                     </Grid>
                 </Grid>
-                <Grid container item spacing={2} xs={12} alignItems='center' justify='center'>
-                    <Grid item>
+                <Grid container item xs={12} spacing={2} alignItems='center' justify='center'>
+                    <Grid item xs={12} alignItems='center' justify='center'>
                         <ItemList setTicketItems={setTicketItem} />
                     </Grid>
                 </Grid>
