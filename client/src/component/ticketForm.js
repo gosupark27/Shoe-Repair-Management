@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import TicketService from '../services/API';
 import { useHistory } from 'react-router-dom'
 import ItemList from './itemList';
@@ -37,7 +36,7 @@ const TicketForm = () => {
     return (
         <div style={{ marginTop: 20 }}>
             <Grid container spacing={2} direction="column" alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
-                <Grid container item spacing={2} xs={12} alignItems='flex-start' justify='center' style={{backgroundColor:'#00FF00'}}>
+                <Grid container item spacing={2} xs={4} alignItems='flex-start' justify='center'>
                     <Grid item xs={6}>
                         <TextField label="Ticket Number" variant="outlined" value={ticketNumber} onChange={(e) => setTicketNumber(e.target.value)} />
                     </Grid>
@@ -45,7 +44,7 @@ const TicketForm = () => {
                         <TextField label="Drop Date" type="datetime-local" variant="outlined" value={dropDate} onChange={(e) => setDropDate(e.target.value)} />
                     </Grid>
                 </Grid>
-                <Grid container item spacing={2} xs={12} alignItems='center' justify='center' style={{backgroundColor:'#FFFF00'}}>
+                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
                     <Grid item >
                         <TextField label="First Name" variant="outlined" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     </Grid>
@@ -53,7 +52,7 @@ const TicketForm = () => {
                         <TextField label="Last Name" variant="outlined" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     </Grid>
                 </Grid>
-                <Grid container item spacing={2} xs={12} alignItems='center' justify='center' style={{backgroundColor:'#FF00FF'}}>
+                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
                     <Grid item xs={6}>
                         <TextField label="Phone" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     </Grid>
@@ -61,9 +60,16 @@ const TicketForm = () => {
                         <TextField label="Pickup Date" type="datetime-local" variant="outlined" value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
                     </Grid>
                 </Grid>
-                <Grid container item spacing={2} xs={12} alignItems='center' justify='center' style={{backgroundColor:'#FF0000'}}>
+                <Grid container item spacing={2} xs={12} alignItems='center' justify='center'>
                     <Grid item>
                         <ItemList setTicketItems={setTicketItem} />
+                    </Grid>
+                </Grid>
+                <Grid container item spacing={2} xs={12} alignItems='center' justify='center'>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={callApi}>
+                            Create Ticket
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>

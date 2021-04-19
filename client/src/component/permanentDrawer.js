@@ -18,7 +18,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AppsIcon from '@material-ui/icons/Apps';
+import { useHistory} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -45,12 +45,16 @@ const useStyles = makeStyles((theme) => ({
 const PermanentDrawer = () => {
     const classes = useStyles();
     const [open, setOpen] = useState({});
+    const history = useHistory()
 
     const itemClick = (name) => {
         let input = { [name]: !open[name] };
         setOpen(input);
-        console.log(open);
     };
+
+    const wtf = () => {
+        console.log('wtf hello')
+    }
 
     return (
         <div className={classes.root}>
@@ -89,7 +93,7 @@ const PermanentDrawer = () => {
     
               <Collapse in={open.ticket}>
                 <List className={classes.nestedList}>
-                  <ListItem button>
+                  <ListItem button onClick={() => history.push('/ticket')}>
                     <ListItemIcon>
                       <AddIcon />
                     </ListItemIcon>
