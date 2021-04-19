@@ -1,6 +1,7 @@
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import {useState} from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,12 +30,13 @@ const useStyles = makeStyles(theme => ({
 
 const Item = ({ remove, item, updateItemList }) => {
 
+    const[itemSelect, setItemSelect] = useState('')
     const classes = useStyles()
 
+    console.log(itemSelect)
     const itemNameChange = (e) => {
-        const itemNameInput = e.target.value;
-        console.log(e.target)
-        console.log(e.target.name)
+        const itemNameInput = e.target.value
+        setItemSelect(itemNameInput.substr(0, itemNameInput.indexOf(' ')))
         updateItemList(item.id, itemNameInput, 'itemName');
     }
 
@@ -49,7 +51,17 @@ const Item = ({ remove, item, updateItemList }) => {
         Purse: [{ id: 1, name: 'Purse' }]
     };
 
+    const shoeRepairs = ['heels', 'half soles', 'full soles', 'clean']
+    const purseRepairs = ['strap', 'handle', 'zipper', 'clean']
 
+    let repairOptions = null
+
+    if(itemSelect === 'Men' || itemSelect === 'Women'){
+        repairOptions = shoeRepairs
+    } 
+    else if(itemSelect === 'Purse'){
+        repairOptions = purseRepairs
+    }
 
     return (
         <ListItem>
@@ -100,12 +112,17 @@ const Item = ({ remove, item, updateItemList }) => {
                                     displayEmpty
                                     className={classes.selectEmpty}
                                 >
-                                    <MenuItem value="">
+                                    {repairOptions ? 
+                                            repairOptions.map((repair, index) => {
+                                                return(
+                                                    <MenuItem key={index} value={repair}>{repair}</MenuItem>
+                                                )
+                                                
+                                            })
+                                    : <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value={'Half Sole'}>Half Sole</MenuItem>
-                                    <MenuItem value={'Heels'}>Heels</MenuItem>
-                                    <MenuItem value={'Clean'}>Clean</MenuItem>
+                                    }
                                 </Select>
                             </FormControl>
                         </Grid>
