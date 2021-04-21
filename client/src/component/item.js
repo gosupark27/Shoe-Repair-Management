@@ -17,6 +17,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from "@material-ui/core/Button"
 
+
 const useStyles = makeStyles(theme => ({
     formControl: {
         margin: theme.spacing(1),
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Item = ({ category, setCategory, item, updateItemList, setItem, setRepair }) => {
+const Item = ({ repairs, remove, repairChips, category, setCategory, item, updateItemList, setItem, setRepairs, setChip }) => {
 
     const [itemSelect, setItemSelect] = useState('')
     const classes = useStyles()
@@ -64,9 +65,9 @@ const Item = ({ category, setCategory, item, updateItemList, setItem, setRepair 
 
     let itemList = []
 
-    if(category.includes('Men')){itemList = sortItems(MenItems)}
-    else if(category.includes('Women')){itemList = sortItems(WomenItems)}
-    else if(category.includes('Handbag')){itemList = sortItems(HandbagItems)}
+    if (category.includes('Men')) { itemList = sortItems(MenItems) }
+    else if (category.includes('Women')) { itemList = sortItems(WomenItems) }
+    else if (category.includes('Handbag')) { itemList = sortItems(HandbagItems) }
     //do we need an else statement here? 
 
     // const itemList = {
@@ -87,13 +88,17 @@ const Item = ({ category, setCategory, item, updateItemList, setItem, setRepair 
         repairOptions = purseRepairs.sort()
     }
 
-    console.log(repairOptions)
+    const createRepairChip = () => {
 
+    }
 
+    const handleRepairChange = (event, value) => {
+        setRepairs(value)
+    }
 
     return (
         <>
-            <Grid container item xs={12} alignItems='center' justify='center'>
+            <Grid container item xs={10}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Category</FormLabel>
                     <RadioGroup
@@ -111,11 +116,14 @@ const Item = ({ category, setCategory, item, updateItemList, setItem, setRepair 
                     </RadioGroup>
                 </FormControl>
             </Grid>
+            <Grid item xs={2}>
+                <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(item.id)} />
+            </Grid>
             <Grid item xs={5}>
                 <Autocomplete
                     options={itemList}
                     getOptionLabel={(itemList) => itemList.name}
-                    getOptionSelected={(option,value) => option.name === value.name}
+                    getOptionSelected={(option, value) => option.name === value.name}
                     style={{ width: 300 }}
                     onChange={setItem}
                     renderInput={(params) => <TextField {...params} label="Item Name" variant="outlined" />}
@@ -125,16 +133,14 @@ const Item = ({ category, setCategory, item, updateItemList, setItem, setRepair 
                 <Autocomplete
                     options={repairOptions}
                     getOptionLabel={(repair) => repair}
-                    getOptionSelected={(option,value) => option === value}
+                    getOptionSelected={(option, value) => option === value}
                     style={{ width: 300 }}
-                    onChange={setRepair}
+                    onChange={handleRepairChange}
                     renderInput={(params) => <TextField {...params} label="Repair" variant="outlined" />}
                 />
             </Grid>
-            <Grid item xs={2}>
-                <Button color='primary' onClick={'ust'} fullWidth={true} variant="contained">
-                    Add Repair
-                </Button>
+            <Grid item xs={12}>
+                {repairChips}
             </Grid>
         </>
     )

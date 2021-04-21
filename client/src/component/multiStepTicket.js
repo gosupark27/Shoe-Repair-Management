@@ -153,9 +153,13 @@ export default function CustomizedSteppers() {
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
+            <Button color='primary' className={classes.button}>
+              View Ticket
+            </Button>
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
+            
           </div>
         ) : (
           <div className={classes.instructions}>
@@ -170,7 +174,7 @@ export default function CustomizedSteppers() {
                 onClick={handleNext}
                 className={classes.button}
               >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? 'Save Ticket' : 'Next'}
               </Button>
             </div>
           </div>

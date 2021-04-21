@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core'
+import Chip from "@material-ui/core/Chip"
 // import { Formik, Form } from 'formik';
 // import * as Yup from 'yup';
 
@@ -16,7 +17,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ItemList = ({ setTicketItems }) => {
-    const [itemList, setItemList] = useState([]);
+    
+    const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: '' }]);
     const[category, setCategory] = useState('')
     const[itemName, setItemName]=useState('')
     const[repairs, setRepairs]=useState([])
@@ -31,13 +33,26 @@ const ItemList = ({ setTicketItems }) => {
         setCategory(event.target.value);
       }
 
-    const SetToRepairs = (e, values) => {
-        setRepairs(repairs.concant(values))
+    const SetToRepairs = (repair) => {
+        if(repair){setRepairs(repairs.concat(repair))}
     }
 
     const setToItemName = (e, values) =>{
         setItemName(values)
     }
+
+    const handleDelete = (repairName) => () => {
+        const updatedRepairs = repairs.filter(repair => repair !== repairName)
+        setRepairs(updatedRepairs)
+    }
+
+    const repairChips = repairs?.map(repair => (
+        <Chip
+            size="small"
+            label={repair}
+            onDelete={handleDelete(repair)}
+        />
+    ))
 
     //useEffect(() => { setTicketItems(itemList) }, [itemList])
 
@@ -57,6 +72,8 @@ const ItemList = ({ setTicketItems }) => {
         let newItem = { id: tempId, itemName: '', repair: '' }
         setItemList([...itemList, newItem])
     };
+
+    
 
     // const INITIAL_FORM_STATE = {
     //     itemName:'',
@@ -97,13 +114,10 @@ const ItemList = ({ setTicketItems }) => {
                 <Container maxWidth='md' >
                     <div className={classes.formWrapper}>
                         <Grid container spacing={2}>
-                            <Grid container item xs={12} spacing={2}>
-                                <Item category={category} repair={repairs} setRepairs={SetToRepairs} setItem={setToItemName}  setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
-                            </Grid>
                             {
                                 itemList.map(item => (
-                                    <Item key={item.id} item={item} remove={removeItem} updateItemList={updateItemList}
-                                    />
+                                    <Item key={item.id} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName}  setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
+                                    
                                 ))
                             }
                             <Grid item xs={12}>
