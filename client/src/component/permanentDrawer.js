@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,8 +10,8 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
-import SearchIcon from "@material-ui/icons/Search";
-import NoteIcon from '@material-ui/icons/Note';
+import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import PersonIcon from '@material-ui/icons/Person';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -52,13 +51,8 @@ const PermanentDrawer = () => {
         setOpen(input);
     };
 
-    const wtf = () => {
-        console.log('wtf hello')
-    }
-
     return (
         <div className={classes.root}>
-          <CssBaseline />
           <Drawer
             className={classes.drawer}
             variant="permanent"
@@ -85,7 +79,7 @@ const PermanentDrawer = () => {
             <Divider />
             <List>
               <ListItem button onClick={itemClick.bind(this, "ticket")}>
-              <ListItemIcon><NoteIcon/></ListItemIcon>
+              <ListItemIcon><ListAltIcon/></ListItemIcon>
                 <ListItemText primary="Ticket" />
                 
                 {open["ticket"] ? <ExpandLess /> : <ExpandMore />}
@@ -101,9 +95,9 @@ const PermanentDrawer = () => {
                   </ListItem>
                   <ListItem button>
                     <ListItemIcon>
-                      <SearchIcon />
+                      <ViewHeadlineIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Search" />
+                    <ListItemText primary="View" />
                   </ListItem>
                 </List>
               </Collapse>
@@ -127,9 +121,9 @@ const PermanentDrawer = () => {
                   </ListItem>
                   <ListItem button>
                     <ListItemIcon>
-                      <SearchIcon />
+                      <ViewHeadlineIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Search" />
+                    <ListItemText primary="View" />
                   </ListItem>
                 </List>
               </Collapse>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Tab, AppBar } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import TicketForm from './ticketForm';
+import TicketForm from './customerForm';
 import Login from './login';
 import EditTicket from './editTicket'
 import { makeStyles } from '@material-ui/core/styles'

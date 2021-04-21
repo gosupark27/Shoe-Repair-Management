@@ -23,40 +23,44 @@ const EditTicket = () => {
     };
 
     return (
-        <div>
-            <Container>
-                <Grid container spacing={0} alignItems="center" justify="center" style={{ minHeight: "50vh" }}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <TextField label="Ticket Number" variant="outlined" value={savedTicket.ticketNum} />
-                            <TextField label="Drop Date" variant="outlined" value={savedTicket.dropDate} />
-                        </Grid>
+        <div style={{ marginTop: 20 }}>
+            <Grid container spacing={2} direction="column" alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
+                <Grid container item spacing={2} xs={4} alignItems='flex-start' justify='center'>
+                    <Grid item xs={6}>
+                        <TextField label="Ticket Number" variant="outlined" value={savedTicket.ticketNum} />
                     </Grid>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <TextField label="First Name" variant="outlined" value={savedTicket.firstName} />
-                            <TextField label="Last Name" variant="outlined" value={savedTicket.lastName} />
-                        </Grid>
-
-                    </Grid>
-                    <Grid container>
-
-                        <Grid item xs={12}>
-                            <TextField label="Phone" variant="outlined" value={savedTicket.phone} />
-                            <TextField label="Pickup Date" variant="outlined" value={savedTicket.pickUpDate} />
-                        </Grid>
-                    </Grid>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Button variant="contained" color="primary" onClick={() => null}>
-                                Save Changes
-                        </Button>
-                        </Grid>
+                    <Grid item xs={6}>
+                        <TextField label="Drop Date" variant="outlined" value={savedTicket.dropDate} />
                     </Grid>
                 </Grid>
-                <Container>
-                    {savedTicket.ticketItems.map(item => {
-                        return (
+                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
+                    <Grid item >
+                        <TextField label="First Name" variant="outlined" value={savedTicket.firstName} />
+                    </Grid>
+                    <Grid item >
+                        <TextField label="Last Name" variant="outlined" value={savedTicket.lastName} />
+                    </Grid>
+                </Grid>
+                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
+                    <Grid item xs={6}>
+                        <TextField label="Phone" variant="outlined" value={savedTicket.phone} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField label="Pickup Date" variant="outlined" value={savedTicket.pickUpDate} />
+                    </Grid>
+                </Grid>
+                <Grid container item spacing={2} xs={12} alignItems='center' justify='center'>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={() => null}>
+                            Save Changes
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid container>
+                {savedTicket.ticketItems.map(item => {
+                    return (
+                        <Grid container item alignItems='center' justify='center' xs={12}>
                             <Card>
                                 <CardContent>
                                     <Typography variant='h2' color="textSecondary" gutterBottom>
@@ -78,10 +82,10 @@ const EditTicket = () => {
                                     <Button size="small" color='secondary'>Delete Item</Button>
                                 </CardActions>
                             </Card>
-                        )
-                    })}
-                </Container>
-            </Container>
+                        </Grid>
+                    )
+                })}
+            </Grid>
         </div>
     )
 }
