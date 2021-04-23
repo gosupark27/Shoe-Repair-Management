@@ -21,13 +21,17 @@ router.put('/', async (req, res) => {
 })
 
 // Update Ticket
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
 
   res.sendStatus(200);
   await Ticket.updateOne({ id: "id_goes_here" }, req.body);
 })
 
 // Retrieve tickets
-//router.get()
+router.get('/', async (req,res) =>{
+  await Ticket.find()
+        .then((tickets) => res.status(200).json(tickets))
+        .catch(error => console.log(error))
+})
 
 module.exports = router;

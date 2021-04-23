@@ -16,7 +16,7 @@ const TicketSchema = new mongoose.Schema(
         lastName: String, 
         phone: String, 
         pickUpDate: String,
-        ticketItems:[{itemName: String, repair: String}],
+        ticketItems:[{category:String, itemName: String, repair:[{name:String,price:{type:String, default:Math.ceil(Math.random() * 100)}}] }],
     }
 )
 
