@@ -91,7 +91,6 @@ const TicketForm = () => {
                             validationSchema={FORM_VALIDATION}
                             onSubmit={values => {
                                 values.ticketItems = ticketItems
-                                callApi(values)
                             }}
                         >
                             <Form>
