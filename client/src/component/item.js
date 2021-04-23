@@ -16,6 +16,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from "@material-ui/core/Button"
+import Paper from '@material-ui/core/Paper';
+import { Container } from '@material-ui/core'
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +33,12 @@ const useStyles = makeStyles(theme => ({
     menuText: {
         fontSize: 30,
         textAlign: 'center',
-    }
+    },
+    formWrapper: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        padding:theme.spacing(3),
+    },
 }));
 
 
@@ -97,7 +104,7 @@ const Item = ({ repairs, remove, repairChips, category, setCategory, item, updat
     }
 
     return (
-        <>
+        <Container component={Paper} className={classes.formWrapper}>
             <Grid container item xs={10}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Category</FormLabel>
@@ -142,7 +149,7 @@ const Item = ({ repairs, remove, repairChips, category, setCategory, item, updat
             <Grid item xs={12}>
                 {repairChips}
             </Grid>
-        </>
+        </Container>
     )
 }
 

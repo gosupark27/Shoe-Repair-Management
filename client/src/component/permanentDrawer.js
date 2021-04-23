@@ -87,13 +87,13 @@ const PermanentDrawer = () => {
     
               <Collapse in={open.ticket}>
                 <List className={classes.nestedList}>
-                  <ListItem button onClick={() => history.push('/ticket')}>
+                  <ListItem button onClick={() => history.push('/ticket/create')}>
                     <ListItemIcon>
                       <AddIcon />
                     </ListItemIcon>
                     <ListItemText primary="Create" />
                   </ListItem>
-                  <ListItem button>
+                  <ListItem button onClick={() => history.push('/ticket/view')}>
                     <ListItemIcon>
                       <ViewHeadlineIcon />
                     </ListItemIcon>

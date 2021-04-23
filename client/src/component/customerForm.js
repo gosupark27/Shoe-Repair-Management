@@ -9,11 +9,13 @@ import * as Yup from 'yup';
 import Textfield from './FormsUI/Textfield/index'
 import Button from './FormsUI/Button/index'
 import DateTimePicker from './FormsUI/DateTimePicker/index'
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(8),
+        padding:theme.spacing(4),
     },
 }));
 
@@ -84,7 +86,7 @@ const TicketForm = () => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Container maxWidth='md' >
+                <Container component={Paper} maxWidth='md' >
                     <div className={classes.formWrapper}>
                         <Formik
                             initialValues={{ ...INITIAL_FORM_STATE }}

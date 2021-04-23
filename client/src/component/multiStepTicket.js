@@ -89,7 +89,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft:drawerWidth,
+    marginLeft: drawerWidth,
   },
   button: {
     marginRight: theme.spacing(1),
@@ -101,18 +101,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Enter customer details','Enter item(s) details',  'Confirm Ticket'];
+  return ['Enter item(s) details', 'Enter customer details', 'Confirm Ticket'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return (
-          <CustomerForm/>
+        <ItemForm />
       );
     case 1:
       return (
-      <ItemForm/>
+        <CustomerForm />
       );
     case 2:
       return 'This is the bit I really care about! <EditTicket/>';
@@ -159,7 +159,7 @@ export default function CustomizedSteppers() {
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
-            
+
           </div>
         ) : (
           <div className={classes.instructions}>

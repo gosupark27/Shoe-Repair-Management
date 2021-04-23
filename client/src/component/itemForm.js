@@ -6,6 +6,7 @@ import Item from './item';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core'
 import Chip from "@material-ui/core/Chip"
+import Paper from '@material-ui/core/Paper';
 // import { Formik, Form } from 'formik';
 // import * as Yup from 'yup';
 
