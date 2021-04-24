@@ -2,14 +2,16 @@ import React, {useState} from 'react'
 import ItemForm from './itemForm'
 import CustomerForm from './customerForm'
 
-const TicketForm = () => {
+const CreateTicketForm = () => {
     const[ticketDetails, setTicketDetails]=useState({})
+
     return(
         <div>
-            <ItemForm/>
-            <CustomerForm/>
+            <ItemForm setTicket={setTicketDetails}/>
+            <CustomerForm setTicket={setTicketDetails}/>
         </div>
     )
+    
 }
 
-export default TicketForm
+export default CreateTicketForm

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ItemList = ({ setTicketItems }) => {
+const ItemList = ({ setTicket }) => {
     
     const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: '' }]);
     const[category, setCategory] = useState('')

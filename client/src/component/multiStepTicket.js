@@ -9,8 +9,8 @@ import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CustomerForm from './customerForm'
-import ItemForm from './itemForm'
+import CreateTicketForm from './createTicketForm'
+import EditTicketFrom from './editTicketForm'
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -101,21 +101,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Enter customer details','Enter item(s) details',  'Confirm Ticket'];
+  return ['Create Ticket','Confirm Ticket Details',  'View Ticket'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return (
-          <CustomerForm/>
+          <CreateTicketForm/>
       );
     case 1:
       return (
-      <ItemForm/>
+      <EditTicketForm/>
       );
     case 2:
-      return 'This is the bit I really care about! <EditTicket/>';
+      return ' <ViewTickets/>';
     default:
       return 'Unknown step';
   }
@@ -174,7 +174,7 @@ export default function CustomizedSteppers() {
                 onClick={handleNext}
                 className={classes.button}
               >
-                {activeStep === steps.length - 1 ? 'Save Ticket' : 'Next'}
+                {activeStep === steps.length - 2 ? 'Save Ticket' : 'Next'}
               </Button>
             </div>
           </div>

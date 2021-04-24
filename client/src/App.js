@@ -1,7 +1,7 @@
 import Login from './component/login'
 import PermDrawer from './component/permanentDrawer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import EditTicket from './component/editTicket'
+import EditTicket from './component/editTicketForm'
 import MultiStepTicket from './component/multiStepTicket'
 
 function App() {

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TicketForm = () => {
+const TicketForm = ({setTicket}) => {
     const date = new Date()
     const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
     // const [firstName, setFirstName] = useState('')
@@ -90,7 +90,7 @@ const TicketForm = () => {
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             validationSchema={FORM_VALIDATION}
                             onSubmit={values => {
-                                values.ticketItems = ticketItems
+                                setTicket(...values)
                             }}
                         >
                             <Form>

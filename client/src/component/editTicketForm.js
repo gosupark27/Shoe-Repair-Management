@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 
-const EditTicket = () => {
+const EditTicketForm = () => {
     const savedTicket = useLocation().state
     console.log(savedTicket.ticketItems)
 
@@ -90,4 +90,4 @@ const EditTicket = () => {
     )
 }
 
-export default EditTicket;
+export default EditTicketForm
