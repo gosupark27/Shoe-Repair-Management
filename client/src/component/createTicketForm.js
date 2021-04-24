@@ -3,7 +3,7 @@ import ItemForm from './itemForm'
 import CustomerForm from './customerForm'
 import Grid from '@material-ui/core/Grid';
 
-const CreateTicketForm = () => {
+const CreateTicketForm = ({next}) => {
     
     return (
         <Grid container>
@@ -11,7 +11,7 @@ const CreateTicketForm = () => {
                 <ItemForm />
             </Grid>
             <Grid item xs={12}>
-                <CustomerForm />
+                <CustomerForm next={next}/>
             </Grid>
         </Grid>
     )

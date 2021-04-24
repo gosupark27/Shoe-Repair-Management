@@ -15,12 +15,13 @@ import {TicketContext} from './Contexts/TicketContext'
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
-        margin: theme.spacing(2),
-        padding:theme.spacing(3),
+        margin: theme.spacing(1),
+        padding:theme.spacing(1),
     },
 }));
 
-const TicketForm = () => {
+const CustomerForm = ({next}) => {
+
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
     const date = new Date()
     const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
@@ -57,8 +58,6 @@ const TicketForm = () => {
         ticketNumber: '',
         dropDate: today,
         pickupDate: '',
-        ticketItems:'',
-
     };
 
     const FORM_VALIDATION = Yup.object().shape({
@@ -89,17 +88,22 @@ const TicketForm = () => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Container maxWidth='lg' component={Paper}>
-                    <div  className={classes.formWrapper}>
+                <Container maxWidth='lg' >
+                    <div>
                         <Formik
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             validationSchema={FORM_VALIDATION}
                             onSubmit={values => {
-                                setTicketDetails(...ticketDetails, ...values)
+                                console.log(values)
+                                console.log(typeof values)
+                                setTicketDetails({...ticketDetails,...values})
+                                console.log(ticketDetails)
+                                next()
+                                console.log('woohooo next step?')
                             }}
                         >
                             <Form>
-                                <Grid container spacing={2}>
+                                <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
 
                                     <Grid item xs={6}>
                                         <Textfield name='ticketNumber' label='Ticket Number' />
@@ -125,6 +129,11 @@ const TicketForm = () => {
                                         <DateTimePicker name='pickupDate' label='Pick Up' />
                                     </Grid>
                                 </Grid>
+                                <Grid item xs={12} style={{textAlign:'right'}}>
+                                        <Button>
+                                            Next
+                                        </Button>
+                                    </Grid>
                             </Form>
 
                         </Formik>
@@ -138,4 +147,4 @@ const TicketForm = () => {
 
 }
 
-export default TicketForm;
+export default CustomerForm;

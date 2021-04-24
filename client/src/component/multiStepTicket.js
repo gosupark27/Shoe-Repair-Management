@@ -105,16 +105,16 @@ function getSteps() {
   return ['Create Ticket', 'Confirm Ticket Details', 'View Ticket'];
 }
 
-function getStepContent(step) {
+function getStepContent(step, next) {
 
   switch (step) {
     case 0:
       return (
-        <CreateTicketForm />
+        <CreateTicketForm nextStep={next}/>
       );
     case 1:
       return (
-        <EditTicketForm />
+        <EditTicketForm nextStep={next}/>
       );
     case 2:
       return ' <ViewTickets/>';
@@ -130,10 +130,6 @@ export default function CustomizedSteppers() {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleReset = () => {
@@ -166,11 +162,8 @@ export default function CustomizedSteppers() {
             </div>
           ) : (
             <div className={classes.instructions}>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, handleNext)}
               <div>
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  Back
-              </Button>
                 <Button
                   variant="contained"
                   color="primary"

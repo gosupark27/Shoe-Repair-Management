@@ -14,7 +14,7 @@ const ButtonWrapper = ({children, }) => {
         variant:'contained',
         onClick: handleSubmit,
         color: 'primary',
-        fullWidth:true,
+        fullWidth:false,
     }
     
     return(
