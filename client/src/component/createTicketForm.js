@@ -1,17 +1,22 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import ItemForm from './itemForm'
 import CustomerForm from './customerForm'
+import Grid from '@material-ui/core/Grid';
 
 const CreateTicketForm = () => {
-    const[ticketDetails, setTicketDetails]=useState({})
-
-    return(
-        <div>
-            <ItemForm setTicket={setTicketDetails}/>
-            <CustomerForm setTicket={setTicketDetails}/>
-        </div>
-    )
     
+
+    return (
+        <Grid container>
+            <Grid item xs={12}>
+                <ItemForm />
+            </Grid>
+            <Grid item xs={12}>
+                <CustomerForm />
+            </Grid>
+        </Grid>
+    )
+
 }
 
 export default CreateTicketForm

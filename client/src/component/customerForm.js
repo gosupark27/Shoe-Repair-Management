@@ -14,8 +14,7 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(8),
+        margin: theme.spacing(2),
         padding:theme.spacing(3),
     },
 }));
@@ -87,8 +86,8 @@ const TicketForm = ({setTicket}) => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Container maxWidth='md' component={Paper}>
-                    <div className={classes.formWrapper}>
+                <Container maxWidth='lg' component={Paper} className={classes.formWrapper}>
+                    <div>
                         <Formik
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             validationSchema={FORM_VALIDATION}
@@ -121,12 +120,6 @@ const TicketForm = ({setTicket}) => {
 
                                     <Grid item xs={6}>
                                         <DateTimePicker name='pickupDate' label='Pick Up' />
-                                    </Grid>
-
-                                    <Grid item xs={12}>
-                                        <Button>
-                                            Next
-                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Form>

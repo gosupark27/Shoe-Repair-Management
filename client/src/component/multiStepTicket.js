@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -105,14 +105,15 @@ function getSteps() {
 }
 
 function getStepContent(step) {
+  
   switch (step) {
     case 0:
       return (
-          <CreateTicketForm/>
+          <CreateTicketForm />
       );
     case 1:
       return (
-      <EditTicketForm/>
+      <EditTicketForm />
       );
     case 2:
       return ' <ViewTickets/>';

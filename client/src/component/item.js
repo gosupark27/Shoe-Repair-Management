@@ -16,13 +16,15 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from "@material-ui/core/Button"
+import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 
 
 const useStyles = makeStyles(theme => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
-        maxWidth: 300
+        maxWidth: 300,
     },
     menuItem: {
         fontSize: 15,
@@ -31,7 +33,11 @@ const useStyles = makeStyles(theme => ({
     menuText: {
         fontSize: 30,
         textAlign: 'center',
-    }
+    },
+    formWrapper: {
+        margin: theme.spacing(1),
+        padding:theme.spacing(3),
+    },
 }));
 
 
@@ -97,9 +103,9 @@ const Item = ({ repairs, remove, repairChips, category, setCategory, item, updat
     }
 
     return (
-        <>
-            <Grid container item xs={10}>
-                <FormControl component="fieldset">
+        <Container component={Paper} className={classes.formWrapper}>
+            <Grid container item xs={12} style={{textAlign:'center'}}>
+                <FormControl component="fieldset" style={{margin:'auto'}}>
                     <FormLabel component="legend">Category</FormLabel>
                     <RadioGroup
                         aria-label="Cateogry"
@@ -142,7 +148,7 @@ const Item = ({ repairs, remove, repairChips, category, setCategory, item, updat
             <Grid item xs={12}>
                 {repairChips}
             </Grid>
-        </>
+        </Container>
     )
 }
 

@@ -11,7 +11,7 @@ const DateTimePicker = ({name, ...otherProps}) => {
         ...otherProps,
         type: 'date',
         variant:'outlined',
-        fullWidth:true,
+        fullWidth:false,
         InputLabelProps:{
             shrink:true
         }

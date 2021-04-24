@@ -111,16 +111,16 @@ const ItemList = ({ setTicket }) => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Container maxWidth='md' >
+                <Container maxWidth='lg' >
                     <div className={classes.formWrapper}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={3}>
                             {
                                 itemList.map(item => (
                                     <Item key={item.id} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName}  setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
                                     
                                 ))
                             }
-                            <Grid item xs={12}>
+                            <Grid item xs={12} style={{textAlign: "center"}}>
                                 <Button color='primary' onClick={addItem} variant="contained">
                                     Add Item
                                         </Button>
