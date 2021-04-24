@@ -89,8 +89,8 @@ const TicketForm = () => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Container maxWidth='lg' component={Paper} className={classes.formWrapper}>
-                    <div>
+                <Container maxWidth='lg' component={Paper}>
+                    <div  className={classes.formWrapper}>
                         <Formik
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             validationSchema={FORM_VALIDATION}

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -9,12 +9,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
-import {TicketContext} from './Contexts/TicketContext'
+import { TicketContext } from './Contexts/TicketContext'
+import Paper from '@material-ui/core/Paper';
 
 const EditTicketForm = () => {
     // const savedTicket = useLocation().state
     // console.log(savedTicket.ticketItems)
-    const[ticketDetails, setTicketDetails] = useContext(TicketContext)
+    const [ticketDetails, setTicketDetails] = useContext(TicketContext)
 
     const handleDelete = () => {
         console.info('You clicked the delete icon.');
@@ -25,70 +26,38 @@ const EditTicketForm = () => {
     };
 
     return (
-        <div style={{ marginTop: 20 }}>
-            <Grid container spacing={2} direction="column" alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
-                <Grid container item spacing={2} xs={4} alignItems='flex-start' justify='center'>
-                    <Grid item xs={6}>
-                        <TextField label="Ticket Number" variant="outlined" value={ticketDetails.ticketNum} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField label="Drop Date" variant="outlined" value={ticketDetails.dropDate} />
-                    </Grid>
+        <Grid container component={Paper}>
+            <Grid item xs={12}>
+                <Typography>Customer Details</Typography>
+            </Grid>
+            <Grid container item xs={12}>
+                <Grid item xs={10}>
+                    <Typography>{ticketDetails.ticketNumber}</Typography>
+                    <Typography>{`${ticketDetails.firstName} ${ticketDetails.LastName}`}</Typography>
+                    <Typography>{ticketDetails.phone}</Typography>
+                    <Typography>{ticketDetails.dropDate}</Typography>
+                    <Typography>{ticketDetails.pickUpDate}</Typography>
                 </Grid>
-                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
-                    <Grid item >
-                        <TextField label="First Name" variant="outlined" value={ticketDetails.firstName} />
-                    </Grid>
-                    <Grid item >
-                        <TextField label="Last Name" variant="outlined" value={ticketDetails.lastName} />
-                    </Grid>
-                </Grid>
-                <Grid container item spacing={2} xs={4} alignItems='center' justify='center'>
-                    <Grid item xs={6}>
-                        <TextField label="Phone" variant="outlined" value={ticketDetails.phone} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField label="Pickup Date" variant="outlined" value={ticketDetails.pickUpDate} />
-                    </Grid>
-                </Grid>
-                <Grid container item spacing={2} xs={12} alignItems='center' justify='center'>
-                    <Grid item>
-                        <Button variant="contained" color="primary" onClick={() => null}>
-                            Save Changes
-                        </Button>
-                    </Grid>
+                <Grid item xs={2}>
+                    <Button>Change</Button>
                 </Grid>
             </Grid>
-            <Grid container>
-                {ticketDetails.ticketItems.map(item => {
-                    return (
-                        <Grid container item alignItems='center' justify='center' xs={12}>
-                            <Card>
-                                <CardContent>
-                                    <Typography variant='h2' color="textSecondary" gutterBottom>
-                                        {item.itemName}
-                                    </Typography>
-                                    <Chip
-                                        label={item.repair}
-                                        onClick={handleClick}
-                                        onDelete={handleDelete}
-                                    />
-                                    <Chip
-                                        label="Add Repair"
-                                        clickable
-                                        color="primary"
-                                        onClick={handleClick}
-                                    />
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small" color='secondary'>Delete Item</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    )
-                })}
+            <Grid item xs={12}>
+                <Typography>Item Details</Typography>
             </Grid>
-        </div>
+            <Grid container item xs={12}>
+                <Grid item xs={12}>
+                    {ticketDetails.ticketItems.map(item => {
+                        let arr = []
+                        arr.push(<Typography>{item.category}</Typography>)
+                        arr.push(<Typography>{item.itemName}</Typography>)
+                        arr.push(<Typography>{item.repair}</Typography>)
+
+                        return arr
+                    })}
+                </Grid>
+            </Grid>
+        </Grid>
     )
 }
 

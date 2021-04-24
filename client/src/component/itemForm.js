@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,7 +6,7 @@ import Item from './item';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core'
 import Chip from "@material-ui/core/Chip"
-import {TicketContext} from './Contexts/TicketContext'
+import { TicketContext } from './Contexts/TicketContext'
 // import { Formik, Form } from 'formik';
 // import * as Yup from 'yup';
 
@@ -18,28 +18,53 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ItemList = () => {
-    const[ticketDetails, setTicketDetails] = useContext(TicketContext)
-    
+    const [ticketDetails, setTicketDetails] = useContext(TicketContext)
+
+
+
     const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: '' }]);
-    const[category, setCategory] = useState('')
-    const[itemName, setItemName]=useState('')
-    const[repairs, setRepairs]=useState([])
+    const [category, setCategory] = useState('')
+    const [itemName, setItemName] = useState('')
+    const [repairs, setRepairs] = useState([])
     const classes = useStyles()
+
+    useEffect(() => {
+        setTicketDetails({ ...ticketDetails, ticketItems: itemList })
+    }, [itemList])
+    console.log(ticketDetails.itemList)
+    console.log('ticket', ticketDetails)
+
 
     const removeItem = (index) => {
         const newItemList = itemList.filter(item => item.id !== index);
         setItemList(newItemList);
     }
 
-    const setToCategory = (event) => {
-        setCategory(event.target.value);
-      }
-
-    const SetToRepairs = (repair) => {
-        if(repair){setRepairs(repairs.concat(repair))}
+    const updateItemList = (index, value, _prop) => {
+        const newItemList = itemList.map((item) => {
+            if (item.id === index) {
+                item[_prop] = value;
+            }
+            return item;
+        });
+        setItemList(newItemList)
     }
 
-    const setToItemName = (e, values) =>{
+    const addItem = () => {
+        let tempId = uuidv4();
+        let newItem = { id: tempId, itemName: '', repair: '' }
+        setItemList([...itemList, newItem])
+    };
+
+    const setToCategory = (event) => {
+        setCategory(event.target.value);
+    }
+
+    const SetToRepairs = (repair) => {
+        if (repair) { setRepairs(repairs.concat(repair)) }
+    }
+
+    const setToItemName = (e, values) => {
         setItemName(values)
     }
 
@@ -59,28 +84,16 @@ const ItemList = () => {
     //useEffect(() => { setTicketItems(itemList) }, [itemList])
 
 
-    const updateItemList = (index, value, _prop) => {
-        const newItemList = itemList.map((item) => {
-            if (item.id === index) {
-                item[_prop] = value;
-            }
-            return item;
-        });
-        setItemList(newItemList)
-    }
 
-    const addItem = () => {
-        let tempId = uuidv4();
-        let newItem = { id: tempId, itemName: '', repair: '' }
-        setItemList([...itemList, newItem])
-    };
 
-    
+
 
     // const INITIAL_FORM_STATE = {
     //     itemName:'',
     //     category:'',
+    //     ticketItems:'', (itemList) => each item in itemList: {tempId:,category:, itemName:, repair:}
     //     repair:'',
+    //     repair[name:'', price:'']
 
 
     // };
@@ -117,12 +130,12 @@ const ItemList = () => {
                     <div className={classes.formWrapper}>
                         <Grid container spacing={3}>
                             {
-                                itemList.map(item => (
-                                    <Item key={item.id} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName}  setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
-                                    
+                                ticketDetails?.ticketItems?.map(item => (
+                                    <Item key={item.id} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName} setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
+
                                 ))
                             }
-                            <Grid item xs={12} style={{textAlign: "center"}}>
+                            <Grid item xs={12} style={{ textAlign: "center" }}>
                                 <Button color='primary' onClick={addItem} variant="contained">
                                     Add Item
                                         </Button>
