@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TicketService from '../services/API';
@@ -11,7 +11,7 @@ import Textfield from './FormsUI/Textfield/index'
 import Button from './FormsUI/Button/index'
 import DateTimePicker from './FormsUI/DateTimePicker/index'
 import Paper from '@material-ui/core/Paper';
-
+import {TicketContext} from './Contexts/TicketContext'
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TicketForm = ({setTicket}) => {
+const TicketForm = () => {
+    const[ticketDetails, setTicketDetails] = useContext(TicketContext)
     const date = new Date()
     const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
     // const [firstName, setFirstName] = useState('')
@@ -94,7 +95,7 @@ const TicketForm = ({setTicket}) => {
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             validationSchema={FORM_VALIDATION}
                             onSubmit={values => {
-                                setTicket(...values)
+                                setTicketDetails(...ticketDetails, ...values)
                             }}
                         >
                             <Form>

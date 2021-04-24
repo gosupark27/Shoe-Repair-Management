@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,6 +6,7 @@ import Item from './item';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core'
 import Chip from "@material-ui/core/Chip"
+import {TicketContext} from './Contexts/TicketContext'
 // import { Formik, Form } from 'formik';
 // import * as Yup from 'yup';
 
@@ -16,7 +17,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ItemList = ({ setTicket }) => {
+const ItemList = () => {
+    const[ticketDetails, setTicketDetails] = useContext(TicketContext)
     
     const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: '' }]);
     const[category, setCategory] = useState('')
