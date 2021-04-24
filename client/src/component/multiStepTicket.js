@@ -9,8 +9,8 @@ import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CreateTicketForm from './createTicketForm'
-import EditTicketFrom from './editTicketForm'
+import CreateTicketForm from './createTicketForm';
+import EditTicketForm from './editTicketForm';
 
 const QontoConnector = withStyles({
   alternativeLabel: {
