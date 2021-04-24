@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TicketService from '../services/API';
+//Delete
 import { useHistory } from 'react-router-dom'
 import { Formik, Form } from 'formik';
 import Container from '@material-ui/core/Container';
@@ -28,17 +29,18 @@ const TicketForm = ({setTicket}) => {
     // const [pickUpDate, setPickUpDate] = useState(date.toString())
     // const [ticketNumber, setTicketNumber] = useState('')
     // const [dropDate, setDropDate] = useState(date.toString())
-    const [ticketItems, setTicketItems] = useState([])
+    //const [ticketItems, setTicketItems] = useState([])
 
     const classes = useStyles();
 
     let history = useHistory()
 
-    const setTicketItem = (itemList) => {
-        setTicketItems(itemList)
-    }
+    // const setTicketItem = (itemList) => {
+    //     setTicketItems(itemList)
+    // }
 
 
+    //todo: Move this to editTicket?
     const callApi = (values) => {
         TicketService.create(values)
             .then(savedTicket => {
