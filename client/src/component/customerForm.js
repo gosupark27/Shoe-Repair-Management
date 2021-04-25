@@ -51,6 +51,26 @@ const CustomerForm = ({next}) => {
 
     }
 
+    // const INITIAL_FORM_STATE = {
+    //     firstName: '',
+    //     lastName: '',
+    //     phone: '',
+    //     ticketNumber: '',
+    //     dropDate: today,
+    //     pickupDate: '',
+    //     ticketItems:[],
+    //     'ticketItems.item':{
+    //         category:'',
+    //         itemName:'',
+    //         repairs:[],
+    //         tempId:'',
+    //     },
+    //     'ticketItems.item.repairs.repair':{
+    //         name:'',
+    //         price:'',
+    //     }
+    // };
+
     const INITIAL_FORM_STATE = {
         firstName: '',
         lastName: '',
@@ -104,6 +124,8 @@ const CustomerForm = ({next}) => {
                         >
                             <Form>
                                 <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
+
+
 
                                     <Grid item xs={6}>
                                         <Textfield name='ticketNumber' label='Ticket Number' />
