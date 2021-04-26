@@ -3,12 +3,14 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { TicketContext } from './Contexts/TicketContext'
+import { ItemListContext } from './Contexts/ItemListContext'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
 import Chip from "@material-ui/core/Chip"
 import Button from '@material-ui/core/Button';
+
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
@@ -22,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 const CreateTicketForm = () => {
     const classes = useStyles()
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
+    const [itemList, setItemList, removeItem, updateItemList, addItem] = useContext(ItemListContext)
 
     const initialItem = () => {
         if(ticketDetails.ticketItems === undefined || ticketDetails.ticketItems.length === 0){
@@ -32,10 +35,14 @@ const CreateTicketForm = () => {
     }
     
 
-    const [itemList, setItemList] = useState(initialItem());
+    //const [itemList, setItemList] = useState(initialItem());
+    
     // const [category, setCategory] = useState('')
     // const [itemName, setItemName] = useState('')
     // const [repairs, setRepairs] = useState([])
+    useEffect(() => {
+        setItemList(initialItem())
+    },[])
 
     useEffect(() => {
         const today = getToday()
@@ -45,6 +52,7 @@ const CreateTicketForm = () => {
     console.log(ticketDetails)
 
 
+
     const getToday = () => {
         const date = new Date()
         const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
@@ -52,30 +60,30 @@ const CreateTicketForm = () => {
     }
 
 
-    const removeItem = (index) => {
-        const newItemList = itemList.filter(item => item.id !== index);
-        setItemList(newItemList);
-    }
+    // const removeItem = (index) => {
+    //     const newItemList = itemList.filter(item => item.id !== index);
+    //     setItemList(newItemList);
+    // }
 
-    const updateItemList = (index, value, _prop) => {
-        console.log('id:', index)
-        const newItemList = itemList.map((item) => {
-            if (item.id === index) {
-                if (_prop === 'repair') {
-                    item[_prop].push(value)
-                }
-                item[_prop] = value;
-            }
-            return item;
-        });
-        setItemList(newItemList)
-    }
+    // const updateItemList = (index, value, _prop) => {
+    //     console.log('id:', index)
+    //     const newItemList = itemList.map((item) => {
+    //         if (item.id === index) {
+    //             if (_prop === 'repair') {
+    //                 item[_prop].push(value)
+    //             }
+    //             item[_prop] = value;
+    //         }
+    //         return item;
+    //     });
+    //     setItemList(newItemList)
+    // }
 
-    const addItem = () => {
-        let tempId = uuidv4();
-        let newItem = { id: tempId, itemName: '', repair: [], category: '' }
-        setItemList([...itemList, newItem])
-    };
+    // const addItem = () => {
+    //     let tempId = uuidv4();
+    //     let newItem = { id: tempId, itemName: '', repair: [], category: '' }
+    //     setItemList([...itemList, newItem])
+    // };
 
     // const setToCategory = (event) => {
     //     setCategory(event.target.value)

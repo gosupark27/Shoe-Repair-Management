@@ -21,7 +21,6 @@ const ItemList = () => {
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
 
 
-
     const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: '' }]);
     const [category, setCategory] = useState('')
     const [itemName, setItemName] = useState('')

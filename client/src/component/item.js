@@ -19,6 +19,7 @@ import Button from "@material-ui/core/Button"
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { ItemListContext } from './Contexts/ItemListContext'
 import { TicketContext } from './Contexts/TicketContext'
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
@@ -52,11 +53,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Item = ({ id, remove, updateItemList }) => {
-
+const Item = ({id}) => {
+    // { id, remove, updateItemList }
     console.log('item id:',id)
 
     const [ticketDetails] = useContext(TicketContext)
+    const [itemList, setItemList, removeItem, updateItemList, addItem] = useContext(ItemListContext)
     const theme = useTheme()
     const classes = useStyles()
 
@@ -117,13 +119,13 @@ const Item = ({ id, remove, updateItemList }) => {
         return sortedList
     }
 
-    let itemList = []
+    let itemOptions = []
     let repairOptions = []
     let categorySelect = getCategory(id)
 
-    if (categorySelect.includes('Men')) { itemList = sortItems(MenItems) }
-    else if (categorySelect.includes('Women')) { itemList = sortItems(WomenItems) }
-    else if (categorySelect.includes('Handbag')) { itemList = sortItems(HandbagItems) }
+    if (categorySelect.includes('Men')) { itemOptions = sortItems(MenItems) }
+    else if (categorySelect.includes('Women')) { itemOptions = sortItems(WomenItems) }
+    else if (categorySelect.includes('Handbag')) { itemOptions = sortItems(HandbagItems) }
 
     const shoeRepairs = ['New Heels', 'Half Soles', 'Full Soles', 'Taps', 'Clean', 'Dye']
     const purseRepairs = ['New Strap', 'Strap Repair', 'New Zipper', 'Slider Repair', 'Replace Slider', 'Clean', 'Dye']
@@ -139,7 +141,7 @@ const Item = ({ id, remove, updateItemList }) => {
         <Grid item xs={4}>
             <Container component={Paper} className={classes.formWrapper}>
                 <Grid item xs={12} style={{ textAlign: 'right' }}>
-                    <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(id)} />
+                    <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => removeItem(id)} />
                 </Grid>
                 <Grid container item xs={6}>
                     <FormControl className={classes.formControl}>
@@ -168,7 +170,7 @@ const Item = ({ id, remove, updateItemList }) => {
                             className={classes.selectEmpty}
                             inputProps={{ 'aria-label': 'Without label' }}
                         >
-                            {itemList?.map(item =>
+                            {itemOptions?.map(item =>
                                 <MenuItem key={item.id} value={item.name}>{item.name}</MenuItem>
                             )}
                         </Select>
