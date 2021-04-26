@@ -52,6 +52,7 @@ const EditCustomerForm = ({setShow}) => {
                                             type='date'
                                             inputProps={{readOnly:true, disabled:true}}
                                             InputProps={{className:'Mui-disabled'}}
+                                            InputLabelProps={{shrink:true}}
                                             label='Drop off Date'
                                             value={ticketDetails.dropDate}
                                         />
@@ -61,6 +62,7 @@ const EditCustomerForm = ({setShow}) => {
                                             type='date'
                                             inputProps={{readOnly:true, disabled:true}}
                                             InputProps={{className:'Mui-disabled'}}
+                                            InputLabelProps={{shrink:true}}
                                             label='Pickup Date'
                                             value={ticketDetails.pickUpDate}
                                         />
