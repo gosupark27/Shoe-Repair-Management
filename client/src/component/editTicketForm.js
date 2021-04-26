@@ -24,15 +24,31 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Item from './item'
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: 2,
+    },
+}));
 
 const EditTicketForm = () => {
     // const savedTicket = useLocation().state
     // console.log(savedTicket.ticketItems)
+    const classes = useStyles()
     const [ticketDetails] = useContext(TicketContext)
     const [itemList, setItemList] = useContext(ItemListContext)
     const [showComponent, setShowComponent] = useState(false)
 
     const [editId, setEditId] = useState({})
+
 
     const handleCustomerEdit = () => {
         setShowComponent(!showComponent)
@@ -95,26 +111,27 @@ const EditTicketForm = () => {
                                             subheader='Repair Details'
                                         />
                                         <CardContent>
-                                            <TableContainer component={Paper}>
-                                                <Table>
-                                                    <TableHead>
-                                                        <TableRow>
-                                                            <TableCell>Repair</TableCell>
-                                                            <TableCell align='right'>Price</TableCell>
-                                                            <TableCell align='right'>Assigned to</TableCell>
-                                                        </TableRow>
-                                                    </TableHead>
-                                                    <TableBody>
-                                                        {item.repair.map(row =>
-                                                        (
-                                                            <TableRow>
-                                                                <TableCell component='th' scope='row'>{row}</TableCell>
-                                                            </TableRow>
-                                                        )
-                                                        )}
-                                                    </TableBody>
-                                                </Table>
-                                            </TableContainer>
+                                            {console.log('itemId:',item.id)}
+                                            {console.log(ticketDetails.ticketItems)}
+                                            {console.log(ticketDetails.ticketItems.filter(i => i.id === item.id))}
+                                            {console.log(ticketDetails.ticketItems.filter(i => i.id === item.id)[0].repair)}
+                                            <FormControl>
+                                                <Select
+                                                    disabled={true}
+                                                    multiple
+                                                    value={ticketDetails.ticketItems.filter(i => i.id === item.id)[0].repair}
+                                                    style={{ width: '100%' }}
+                                                    input={<Input fullWidth={true} />}
+                                                    renderValue={(selected) => (
+                                                        <div className={classes.chips}>
+                                                            {selected.map((repair) => (
+                                                                <Chip key={repair} label={repair} className={classes.chip} />
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                >
+                                                </Select>
+                                            </FormControl>
                                         </CardContent>
                                     </Card>
                                 </Container>
@@ -123,12 +140,12 @@ const EditTicketForm = () => {
                 ))}
 
             </Grid>
-            {Object.keys(editId).length === 0 ? (<div></div>): (
-                <Grid item xs = { 12 } style = {{ textAlign: 'center' }}>
-            <Button color='primary' variant='contained' onClick={() => setEditId(0)}>Save Changes</Button>
-        </Grid>
-    )
-}
+            {Object.keys(editId).length === 0 ? (<div></div>) : (
+                <Grid item xs={12} style={{ textAlign: 'center' }}>
+                    <Button color='primary' variant='contained' onClick={() => setEditId(0)}>Save Changes</Button>
+                </Grid>
+            )
+            }
         </Grid >
     )
 }
