@@ -36,44 +36,47 @@ const EditTicketForm = () => {
                     {showComponent ? (<CustomerForm show={showComponent} setShow={setShowComponent} />) : (<EditCustomerForm show={showComponent} setShow={setShowComponent} />)}
                 </Grid>
             </Grid>
-            <Grid container item xs={12} alignItems='center' justify='center'>
-                <Grid item xs={6}>
-                    {ticketDetails.ticketItems.map(item => (
-                        <Card>
-                            <CardHeader
-                                action={
-                                    <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
-                                        <EditIcon />
-                                    </IconButton>
-                                }
-                                title={`${item.category} - ${item.itemName}`}
-                                subheader='Repair Details'
-                            />
-                            <CardContent>
-                                <TableContainer component={Paper}>
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Repair</TableCell>
-                                                <TableCell align='right'>Price</TableCell>
-                                                <TableCell align='right'>Assigned to</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {item.repair.map(row =>
-                                                (
+            <Grid container item xs={12} alignItems='center' justify='center' spacing={2}>
+
+                {ticketDetails.ticketItems.map(item => (
+                    <Grid item xs={4} >
+                        <Container maxWidth="sm">
+                            <Card>
+                                <CardHeader
+                                    action={
+                                        <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
+                                            <EditIcon />
+                                        </IconButton>
+                                    }
+                                    title={`${item.category} - ${item.itemName}`}
+                                    subheader='Repair Details'
+                                />
+                                <CardContent>
+                                    <TableContainer component={Paper}>
+                                        <Table>
+                                            <TableHead>
                                                 <TableRow>
-                                                    <TableCell component='th' scope='row'>{row}</TableCell>
+                                                    <TableCell>Repair</TableCell>
+                                                    <TableCell align='right'>Price</TableCell>
+                                                    <TableCell align='right'>Assigned to</TableCell>
                                                 </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {item.repair.map(row =>
+                                                (
+                                                    <TableRow>
+                                                        <TableCell component='th' scope='row'>{row}</TableCell>
+                                                    </TableRow>
                                                 )
-                                            )}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </Grid>
+                                                )}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                </CardContent>
+                            </Card>
+                        </Container>
+                    </Grid>
+                ))}
             </Grid>
         </Grid >
     )
