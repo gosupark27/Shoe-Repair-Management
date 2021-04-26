@@ -19,7 +19,6 @@ import Button from "@material-ui/core/Button"
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { ItemListContext } from './Contexts/ItemListContext'
 import { TicketContext } from './Contexts/TicketContext'
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
@@ -53,37 +52,35 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Item = ({id}) => {
-    // { id, remove, updateItemList }
-    console.log('item id:',id)
+const Item = ({ id, remove, update }) => {
+    console.log('item id:', id)
 
     const [ticketDetails] = useContext(TicketContext)
-    const [itemList, setItemList, removeItem, updateItemList, addItem] = useContext(ItemListContext)
-    const theme = useTheme()
     const classes = useStyles()
 
     const itemNameChange = (e) => {
         const value = e.target.value
-        updateItemList(id, value, 'itemName')
+        update(id, value, 'itemName')
     }
 
     const categoryChange = (e) => {
-        console.log('category change called')
+        
         const value = e.target.value
-        updateItemList(id, value, 'category')
+        console.log('category change called', value, 'id:', id)
+        update(id, value, 'category')
 
     }
 
     const repairChange = (e) => {
         const value = e.target.value
-        updateItemList(id, value, 'repair')
+        update(id, value, 'repair')
 
     }
 
     const getItemName = (id) => {
         const item = ticketDetails.ticketItems.filter(item => item.id === id)
         if (item[0].itemName === "") {
-            return 'Select Item'
+            return ''
         }
         else
             return item[0].itemName
@@ -92,7 +89,7 @@ const Item = ({id}) => {
     const getCategory = (id) => {
         const item = ticketDetails.ticketItems.filter(item => item.id === id)
         if (item[0].category === "") {
-            return 'Select Category'
+            return ''
         }
         else
             return item[0].category
@@ -141,17 +138,19 @@ const Item = ({id}) => {
         <Grid item xs={4}>
             <Container component={Paper} className={classes.formWrapper}>
                 <Grid item xs={12} style={{ textAlign: 'right' }}>
-                    <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => removeItem(id)} />
+                    <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(id)} />
                 </Grid>
-                <Grid container item xs={6}>
+                <Grid container item xs={12}>
                     <FormControl className={classes.formControl}>
+                    <InputLabel>Pick Category</InputLabel>
                         <Select
                             value={getCategory(id)}
                             onChange={categoryChange}
                             displayEmpty={true}
+                            fullWidth={true}
                             renderValue={() => getCategory(id)}
                             className={classes.selectEmpty}
-
+                            defaultValue="Select Category"
                         >
                             {Category.map(item =>
                                 <MenuItem key={item.id} value={item.name}>{item.name}</MenuItem>
@@ -162,6 +161,7 @@ const Item = ({id}) => {
                 </Grid>
                 <Grid item xs={6}>
                     <FormControl className={classes.formControl}>
+                    <InputLabel>Pick Item</InputLabel>
                         <Select
                             value={[...getItemName(id)]}
                             onChange={itemNameChange}
@@ -179,13 +179,14 @@ const Item = ({id}) => {
                 </Grid>
                 <Grid item xs={12}>
                     <FormControl className={classes.formControl}>
-                        <InputLabel>Repair</InputLabel>
+                        <InputLabel>Pick Repair</InputLabel>
                         <Select
+
                             multiple
                             value={getRepair(id)}
-                            style={{width:'100%'}}
+                            style={{ width: '100%' }}
                             onChange={repairChange}
-                            input={<Input fullWidth={true}/>}
+                            input={<Input fullWidth={true} />}
                             renderValue={(selected) => (
                                 <div className={classes.chips}>
                                     {selected.map((repair) => (
@@ -199,7 +200,9 @@ const Item = ({id}) => {
                                     {repair}
                                 </MenuItem>
                             ))}
+                           
                         </Select>
+                        <FormHelperText>Repair Name</FormHelperText>
                     </FormControl>
                 </Grid>
             </Container>

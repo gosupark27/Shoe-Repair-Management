@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 const CreateTicketForm = () => {
     const classes = useStyles()
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
-    const [itemList, setItemList, removeItem, updateItemList, addItem] = useContext(ItemListContext)
+    const [itemList, setItemList] = useContext(ItemListContext)
 
     const initialItem = () => {
         if(ticketDetails.ticketItems === undefined || ticketDetails.ticketItems.length === 0){
@@ -60,30 +60,30 @@ const CreateTicketForm = () => {
     }
 
 
-    // const removeItem = (index) => {
-    //     const newItemList = itemList.filter(item => item.id !== index);
-    //     setItemList(newItemList);
-    // }
+    const removeItem = (index) => {
+        const newItemList = itemList.filter(item => item.id !== index);
+        setItemList(newItemList);
+    }
 
-    // const updateItemList = (index, value, _prop) => {
-    //     console.log('id:', index)
-    //     const newItemList = itemList.map((item) => {
-    //         if (item.id === index) {
-    //             if (_prop === 'repair') {
-    //                 item[_prop].push(value)
-    //             }
-    //             item[_prop] = value;
-    //         }
-    //         return item;
-    //     });
-    //     setItemList(newItemList)
-    // }
+    const updateItemList = (index, value, _prop) => {
+        console.log('id:', index)
+        const newItemList = itemList.map((item) => {
+            if (item.id === index) {
+                if (_prop === 'repair') {
+                    item[_prop].push(value)
+                }
+                item[_prop] = value;
+            }
+            return item;
+        });
+        setItemList(newItemList)
+    }
 
-    // const addItem = () => {
-    //     let tempId = uuidv4();
-    //     let newItem = { id: tempId, itemName: '', repair: [], category: '' }
-    //     setItemList([...itemList, newItem])
-    // };
+    const addItem = () => {
+        let tempId = uuidv4();
+        let newItem = { id: tempId, itemName: '', repair: [], category: '' }
+        setItemList([...itemList, newItem])
+    };
 
     // const setToCategory = (event) => {
     //     setCategory(event.target.value)
@@ -117,8 +117,8 @@ const CreateTicketForm = () => {
         <Grid container>
             <Grid container item xs={12} spacing={2}>
                 {
-                    ticketDetails?.ticketItems?.map(item => (
-                        <Item key={item.id} id={item.id} remove={removeItem} updateItemList={updateItemList} />
+                    ticketDetails.ticketItems?.map(item => (
+                        <Item key={item.id} id={item.id} remove={removeItem} update={updateItemList}/>
 
                     ))
                 }
