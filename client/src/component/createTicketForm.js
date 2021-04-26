@@ -17,17 +17,29 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
+
 const CreateTicketForm = () => {
     const classes = useStyles()
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
 
-    const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: [], category: '' }]);
+    const initialItem = () => {
+        if(ticketDetails.ticketItems === undefined || ticketDetails.ticketItems.length === 0){
+            return [{ id: uuidv4(), itemName: '', repair: [], category: '' }]
+        }
+        else
+            return ticketDetails.ticketItems
+    }
+    
+
+    const [itemList, setItemList] = useState(initialItem());
     // const [category, setCategory] = useState('')
     // const [itemName, setItemName] = useState('')
     // const [repairs, setRepairs] = useState([])
 
     useEffect(() => {
-        setTicketDetails({ ...ticketDetails, ticketItems: itemList })
+        const today = getToday()
+        setTicketDetails({ ...ticketDetails, ticketItems: itemList, dropDate:today })
     }, [itemList])
 
     console.log(ticketDetails)
@@ -36,9 +48,8 @@ const CreateTicketForm = () => {
     const getToday = () => {
         const date = new Date()
         const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
-        setTicketDetails({...ticketDetails,dropDate:today})
+        return today
     }
-    getToday()
 
 
     const removeItem = (index) => {
