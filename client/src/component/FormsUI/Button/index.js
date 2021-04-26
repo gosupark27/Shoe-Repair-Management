@@ -6,7 +6,7 @@ const ButtonWrapper = ({children, }) => {
     
     const{submitForm}=useFormikContext()
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         submitForm()
     }
 

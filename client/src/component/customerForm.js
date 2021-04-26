@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const CustomerForm = ({show, setShow}) => {
+const CustomerForm = ({setShow}) => {
 
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
      
@@ -77,7 +77,7 @@ const CustomerForm = ({show, setShow}) => {
         phone: ticketDetails.phone,
         ticketNumber: ticketDetails.ticketNumber,
         dropDate: ticketDetails.dropDate,
-        pickupDate: ticketDetails.pickUpDate,
+        pickUpDate: ticketDetails.pickUpDate,
     };
 
     const FORM_VALIDATION = Yup.object().shape({
@@ -100,7 +100,7 @@ const CustomerForm = ({show, setShow}) => {
         dropDate: Yup.date()
             .required('Required')
             .typeError('Please enter a valid date'),
-        pickupDate: Yup.date()
+        pickUpDate: Yup.date()
             .required('Required')
             .typeError('Please enter a valid date'),
     });
@@ -113,9 +113,9 @@ const CustomerForm = ({show, setShow}) => {
                             <Formik
                                 initialValues={{ ...INITIAL_FORM_STATE }}
                                 validationSchema={FORM_VALIDATION}
-                                onSubmit={values => {
+                                onSubmit={(values) => {
                                     setTicketDetails({...ticketDetails,...values})
-                                    setShow(!show)
+                                    setShow()
                                 }}
                             >
                                 <Form>
@@ -144,7 +144,7 @@ const CustomerForm = ({show, setShow}) => {
                                         </Grid>
     
                                         <Grid item xs={6}>
-                                            <DateTimePicker name='pickupDate' label='Pick Up' />
+                                            <DateTimePicker name='pickUpDate' label='Pick Up' />
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} style={{textAlign:'right'}}>

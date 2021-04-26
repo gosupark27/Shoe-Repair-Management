@@ -101,8 +101,8 @@ const CreateTicketForm = () => {
         setTicketDetails({
             ...ticketDetails,
             [name]: value,
-
         })
+        console.log(ticketDetails)
    }
 
     return (
