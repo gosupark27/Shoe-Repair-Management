@@ -12,7 +12,7 @@ import Button from './FormsUI/Button/index'
 import DateTimePicker from './FormsUI/DateTimePicker/index'
 import Paper from '@material-ui/core/Paper';
 import {TicketContext} from './Contexts/TicketContext'
-import EditTicketForm from './editTicketForm'
+import EditCustomerForm from './editCustomerForm'
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
@@ -21,10 +21,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const CustomerForm = ({next}) => {
+const CustomerForm = ({show, setShow}) => {
 
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
-    const [showComponent, setShowComponent] = useState(false)
      
     // const [firstName, setFirstName] = useState('')
     // const [lastName, setLastName] = useState('')
@@ -107,18 +106,16 @@ const CustomerForm = ({next}) => {
     });
 
     return (
-        <div>
-            {showComponent ? (<EditTicketForm/>) : (
-            <Grid container>
-                <Grid item xs={12}>
-                    <Container maxWidth='lg' >
+            <Grid container alignItems='center' justify='center'>
+                <Grid item xs={6}>
+                    <Container maxWidth='md' >
                         <div>
                             <Formik
                                 initialValues={{ ...INITIAL_FORM_STATE }}
                                 validationSchema={FORM_VALIDATION}
                                 onSubmit={values => {
                                     setTicketDetails({...ticketDetails,...values})
-                                    setShowComponent(!showComponent)
+                                    setShow(!show)
                                 }}
                             >
                                 <Form>
@@ -162,11 +159,8 @@ const CustomerForm = ({next}) => {
                     </Container>
                 </Grid>
             </Grid>
-            )}
-        </div>
-
     )
 
 }
 
-export default CustomerForm;
+export default CustomerForm

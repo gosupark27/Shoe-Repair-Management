@@ -8,11 +8,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 
-const EditCustomerForm = () => {
+const EditCustomerForm = ({show, setShow}) => {
     // const savedTicket = useLocation().state
     // console.log(savedTicket.ticketItems)
     const [ticketDetails] = useContext(TicketContext)
-    const [showComponent, setShowComponent] = useState(false)
+
+    console.log(show)
 
     return (
         <Grid container>
@@ -21,7 +22,7 @@ const EditCustomerForm = () => {
                         <Card>
                             <CardHeader
                                 action={
-                                    <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
+                                    <IconButton aria-label="edit" onClick={() => setShow(!show)}>
                                         <EditIcon />
                                     </IconButton>
                                 }

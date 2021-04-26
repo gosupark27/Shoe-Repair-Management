@@ -15,70 +15,19 @@ import CardHeader from '@material-ui/core/CardHeader';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CustomerForm from './customerForm'
+import EditCustomerForm from './editCustomerForm'
 
 const EditTicketForm = () => {
     // const savedTicket = useLocation().state
     // console.log(savedTicket.ticketItems)
-    const [ticketDetails, setTicketDetails] = useContext(TicketContext)
+    const [ticketDetails] = useContext(TicketContext)
     const [showComponent, setShowComponent] = useState(false)
 
     return (
         <Grid container>
             <Grid container item xs={12} alignItems='center' justify='center' >
-                <Grid item xs={5}>
-                    {showComponent ? (<CustomerForm />) : (
-                        <Card>
-                            <CardHeader
-                                action={
-                                    <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
-                                        <EditIcon />
-                                    </IconButton>
-                                }
-                                title='Customer Details'
-                                subheader={`Ticket #${ticketDetails.ticketNumber}`}
-                            />
-                            <CardContent>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            
-                                            inputProps={{readOnly:true, disabled:true}}
-                                            InputProps={{className:'Mui-disabled'}}
-                                            label='Full Name'
-                                            value={`${ticketDetails.firstName} ${ticketDetails.lastName}`}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            
-                                            inputProps={{readOnly:true, disabled:true}}
-                                            InputProps={{className:'Mui-disabled'}}
-                                            label='Phone Number'
-                                            value={ticketDetails.phone}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            type='date'
-                                            inputProps={{readOnly:true, disabled:true}}
-                                            InputProps={{className:'Mui-disabled'}}
-                                            label='Drop off Date'
-                                            value={ticketDetails.dropDate}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            type='date'
-                                            inputProps={{readOnly:true, disabled:true}}
-                                            InputProps={{className:'Mui-disabled'}}
-                                            label='Pickup Date'
-                                            value={ticketDetails.pickUpDate}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    )}
+                <Grid item xs={8}>
+                    {showComponent ? (<CustomerForm show={showComponent} setShow={setShowComponent}/>) : (<EditCustomerForm show={showComponent} setShow={setShowComponent}/>)}
                 </Grid>
             </Grid>
             <Grid item xs={12}>
