@@ -31,7 +31,8 @@ const EditTicketForm = () => {
     const [ticketDetails] = useContext(TicketContext)
     const [itemList, setItemList] = useContext(ItemListContext)
     const [showComponent, setShowComponent] = useState(false)
-    const [editId, setEditId] = useState(0)
+
+    const [editId, setEditId] = useState({})
 
     const handleCustomerEdit = () => {
         setShowComponent(!showComponent)
@@ -40,10 +41,14 @@ const EditTicketForm = () => {
     // console.log(showComponent.EditCustomerForm)
     // console.log(true)
     const handleItemEdit = (id) => {
-        setEditId(id)
+        setEditId({ ...editId, [id]: !editId[id] })
+        console.log(editId)
     }
     const removeItem = (index) => {
+        console.log('edit form remove called:', index)
+        console.log('before:', itemList)
         const newItemList = itemList.filter(item => item.id !== index);
+        console.log('after:', newItemList)
         setItemList(newItemList);
     }
 
@@ -71,10 +76,9 @@ const EditTicketForm = () => {
             <Grid container item xs={12} alignItems='center' justify='center' spacing={2}>
 
                 {ticketDetails.ticketItems.map(item => (
-                    item.id === editId ? (
+                    editId[item.id] ? (
                         <>
-                            <Item key={item.id} id={item.id} remove={removeItem} update={updateItemList}/>
-                            <Button onClick={() => setEditId(0)}>Save Changes</Button>
+                            <Item key={item.id} id={item.id} remove={removeItem} update={updateItemList} />
                         </>
                     )
                         : (
@@ -117,7 +121,14 @@ const EditTicketForm = () => {
                             </Grid>
                         )
                 ))}
+
             </Grid>
+            {Object.keys(editId).length === 0 ? (<div></div>): (
+                <Grid item xs = { 12 } style = {{ textAlign: 'center' }}>
+            <Button color='primary' variant='contained' onClick={() => setEditId(0)}>Save Changes</Button>
+        </Grid>
+    )
+}
         </Grid >
     )
 }

@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
 
 
 const Item = ({ id, remove, update }) => {
-    console.log('item id:', id)
 
     const [ticketDetails] = useContext(TicketContext)
     const classes = useStyles()
