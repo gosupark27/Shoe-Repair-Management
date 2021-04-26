@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TicketService from '../services/API';
@@ -12,6 +12,7 @@ import Button from './FormsUI/Button/index'
 import DateTimePicker from './FormsUI/DateTimePicker/index'
 import Paper from '@material-ui/core/Paper';
 import {TicketContext} from './Contexts/TicketContext'
+import EditTicketForm from './editTicketForm'
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
@@ -23,10 +24,8 @@ const useStyles = makeStyles(theme => ({
 const CustomerForm = ({next}) => {
 
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
-     const date = new Date()
-     const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
-    console.log('date:', typeof today)
-    console.log(today)
+    const [showComponent, setShowComponent] = useState(false)
+     
     // const [firstName, setFirstName] = useState('')
     // const [lastName, setLastName] = useState('')
     // const [phone, setPhone] = useState('')
@@ -108,64 +107,63 @@ const CustomerForm = ({next}) => {
     });
 
     return (
-        <Grid container>
-            <Grid item xs={12}>
-                <Container maxWidth='lg' >
-                    <div>
-                        <Formik
-                            initialValues={{ ...INITIAL_FORM_STATE }}
-                            validationSchema={FORM_VALIDATION}
-                            onSubmit={values => {
-                                console.log(values)
-                                console.log(typeof values)
-                                setTicketDetails({...ticketDetails,...values})
-                                console.log(ticketDetails)
-                                next()
-                                console.log('woohooo next step?')
-                            }}
-                        >
-                            <Form>
-                                <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
-
-
-
-                                    <Grid item xs={6}>
-                                        <Textfield name='ticketNumber' label='Ticket Number' />
+        <div>
+            {showComponent ? (<EditTicketForm/>) : (
+            <Grid container>
+                <Grid item xs={12}>
+                    <Container maxWidth='lg' >
+                        <div>
+                            <Formik
+                                initialValues={{ ...INITIAL_FORM_STATE }}
+                                validationSchema={FORM_VALIDATION}
+                                onSubmit={values => {
+                                    setTicketDetails({...ticketDetails,...values})
+                                    setShowComponent(!showComponent)
+                                }}
+                            >
+                                <Form>
+                                    <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
+    
+    
+    
+                                        <Grid item xs={6}>
+                                            <Textfield name='ticketNumber' label='Ticket Number' />
+                                        </Grid>
+    
+                                        <Grid item xs={6}>
+                                            <DateTimePicker name='dropDate' label='Drop Off' />
+                                        </Grid>
+    
+                                        <Grid item xs={6}>
+                                            <Textfield name='firstName' label='First Name' />
+                                        </Grid>
+    
+                                        <Grid item xs={6}>
+                                            <Textfield name='lastName' label='Last Name' />
+                                        </Grid>
+    
+                                        <Grid item xs={6}>
+                                            <Textfield name='phone' label='Phone' />
+                                        </Grid>
+    
+                                        <Grid item xs={6}>
+                                            <DateTimePicker name='pickupDate' label='Pick Up' />
+                                        </Grid>
                                     </Grid>
-
-                                    <Grid item xs={6}>
-                                        <DateTimePicker name='dropDate' label='Drop Off' />
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <Textfield name='firstName' label='First Name' />
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <Textfield name='lastName' label='Last Name' />
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <Textfield name='phone' label='Phone' />
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <DateTimePicker name='pickupDate' label='Pick Up' />
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={12} style={{textAlign:'right'}}>
-                                        <Button>
-                                            Next
-                                        </Button>
-                                    </Grid>
-                            </Form>
-
-                        </Formik>
-                    </div>
-                </Container>
+                                    <Grid item xs={12} style={{textAlign:'right'}}>
+                                            <Button>
+                                                Save Changes
+                                            </Button>
+                                        </Grid>
+                                </Form>
+    
+                            </Formik>
+                        </div>
+                    </Container>
+                </Grid>
             </Grid>
-        </Grid>
-
+            )}
+        </div>
 
     )
 

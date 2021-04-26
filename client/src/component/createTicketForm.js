@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         padding: theme.spacing(3),
     },
 }));
