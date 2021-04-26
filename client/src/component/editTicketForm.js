@@ -16,6 +16,12 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CustomerForm from './customerForm'
 import EditCustomerForm from './editCustomerForm'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 const EditTicketForm = () => {
     // const savedTicket = useLocation().state
@@ -24,28 +30,52 @@ const EditTicketForm = () => {
     const [showComponent, setShowComponent] = useState(false)
 
     return (
-        <Grid container>
+        <Grid container style={{ margin: 10 }} spacing={2}>
             <Grid container item xs={12} alignItems='center' justify='center' >
-                <Grid item xs={8}>
-                    {showComponent ? (<CustomerForm show={showComponent} setShow={setShowComponent}/>) : (<EditCustomerForm show={showComponent} setShow={setShowComponent}/>)}
-                </Grid>
-            </Grid>
-            <Grid item xs={12}>
-                <Typography>Item Details</Typography>
-            </Grid>
-            <Grid container item xs={12}>
                 <Grid item xs={12}>
-                    {ticketDetails.ticketItems.map(item => {
-                        let arr = []
-                        arr.push(<Typography>{item.category}</Typography>)
-                        arr.push(<Typography>{item.itemName}</Typography>)
-                        arr.push(<Typography>{item.repair}</Typography>)
-
-                        return arr
-                    })}
+                    {showComponent ? (<CustomerForm show={showComponent} setShow={setShowComponent} />) : (<EditCustomerForm show={showComponent} setShow={setShowComponent} />)}
                 </Grid>
             </Grid>
-        </Grid>
+            <Grid container item xs={12} alignItems='center' justify='center'>
+                <Grid item xs={6}>
+                    {ticketDetails.ticketItems.map(item => (
+                        <Card>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                }
+                                title={`${item.category} - ${item.itemName}`}
+                                subheader='Repair Details'
+                            />
+                            <CardContent>
+                                <TableContainer component={Paper}>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Repair</TableCell>
+                                                <TableCell align='right'>Price</TableCell>
+                                                <TableCell align='right'>Assigned to</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {item.repair.map(row =>
+                                                (
+                                                <TableRow>
+                                                    <TableCell component='th' scope='row'>{row}</TableCell>
+                                                </TableRow>
+                                                )
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </Grid>
+            </Grid>
+        </Grid >
     )
 }
 
