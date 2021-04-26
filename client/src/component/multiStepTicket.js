@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import CreateTicketForm from './createTicketForm';
 import EditTicketForm from './editTicketForm';
 import { TicketProvider } from './Contexts/TicketContext'
+import { ItemListProvider } from './Contexts/ItemListContext'
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -110,11 +111,11 @@ function getStepContent(step, next) {
   switch (step) {
     case 0:
       return (
-        <CreateTicketForm nextStep={next}/>
+        <CreateTicketForm nextStep={next} />
       );
     case 1:
       return (
-        <EditTicketForm nextStep={next}/>
+        <EditTicketForm nextStep={next} />
       );
     case 2:
       return ' <ViewTickets/>';
@@ -142,48 +143,50 @@ export default function CustomizedSteppers() {
 
   return (
     <TicketProvider>
-      <div className={classes.root}>
-        <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                All steps completed - you&apos;re finished
+      <ItemListProvider>
+        <div className={classes.root}>
+          <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <div>
+            {activeStep === steps.length ? (
+              <div>
+                <Typography className={classes.instructions}>
+                  All steps completed - you&apos;re finished
             </Typography>
-              <Button color='primary' className={classes.button}>
-                View Ticket
+                <Button color='primary' className={classes.button}>
+                  View Ticket
             </Button>
-              <Button onClick={handleReset} className={classes.button}>
-                Reset
+                <Button onClick={handleReset} className={classes.button}>
+                  Reset
             </Button>
 
-            </div>
-          ) : (
-            <div className={classes.instructions}>
-              {getStepContent(activeStep)}
-              <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
-              </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 2 ? 'Save Ticket' : 'Next'}
-                </Button>
               </div>
-            </div>
-          )}
+            ) : (
+              <div className={classes.instructions}>
+                {getStepContent(activeStep)}
+                <div>
+                  <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                    Back
+              </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 2 ? 'Save Ticket' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </ItemListProvider>
     </TicketProvider>
   );
 }
