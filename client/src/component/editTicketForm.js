@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -11,35 +11,44 @@ import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import { TicketContext } from './Contexts/TicketContext'
 import Paper from '@material-ui/core/Paper';
+import CardHeader from '@material-ui/core/CardHeader';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import CustomerForm from './customerForm'
 
 const EditTicketForm = () => {
     // const savedTicket = useLocation().state
     // console.log(savedTicket.ticketItems)
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
-
-    const handleDelete = () => {
-        console.info('You clicked the delete icon.');
-    };
-
-    const handleClick = () => {
-        console.info('You clicked the Chip.');
-    };
+    const[showComponent, setShowComponent] = useState(false)
 
     return (
         <Grid container component={Paper}>
-            <Grid item xs={12}>
-                <Typography>Customer Details</Typography>
-            </Grid>
-            <Grid container item xs={12}>
-                <Grid item xs={10}>
-                    <Typography>{ticketDetails.ticketNumber}</Typography>
-                    <Typography>{`${ticketDetails.firstName} ${ticketDetails.LastName}`}</Typography>
-                    <Typography>{ticketDetails.phone}</Typography>
-                    <Typography>{ticketDetails.dropDate}</Typography>
-                    <Typography>{ticketDetails.pickUpDate}</Typography>
-                </Grid>
-                <Grid item xs={2}>
-                    <Button>Change</Button>
+            <Grid container item xs={12} alignItems='center' justify='center' >
+                <Grid item xs={5}>
+                {showComponent ? (<CustomerForm/>) : (
+                    <Card>
+                        <CardHeader
+                            action={
+                                <IconButton aria-label="edit" onClick={() => setShowComponent(!showComponent)}>
+                                    <EditIcon />
+                                </IconButton>
+                            }
+                            title='Customer Details'
+                            subheader="September 14, 2016"
+                        />
+                        <CardContent>
+                            <Typography>{ticketDetails.ticketNumber}</Typography>
+                            <Typography>{`${ticketDetails.firstName} ${ticketDetails.lastName}`}</Typography>
+                            <Typography>{ticketDetails.phone}</Typography>
+                            <Typography>{ticketDetails.dropDate}</Typography>
+                            <Typography>{ticketDetails.pickUpDate}</Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button>Change</Button>
+                        </CardActions>
+                    </Card>
+                    )}
                 </Grid>
             </Grid>
             <Grid item xs={12}>

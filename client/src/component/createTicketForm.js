@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
     formWrapper: {
         margin: theme.spacing(1),
-        padding: theme.spacing(1),
+        padding: theme.spacing(3),
     },
 }));
 
@@ -22,15 +22,23 @@ const CreateTicketForm = () => {
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
 
     const [itemList, setItemList] = useState([{ id: uuidv4(), itemName: '', repair: [], category: '' }]);
-    const [category, setCategory] = useState('')
-    const [itemName, setItemName] = useState('')
-    const [repairs, setRepairs] = useState([])
+    // const [category, setCategory] = useState('')
+    // const [itemName, setItemName] = useState('')
+    // const [repairs, setRepairs] = useState([])
 
     useEffect(() => {
         setTicketDetails({ ...ticketDetails, ticketItems: itemList })
     }, [itemList])
-    console.log(ticketDetails.itemList)
-    console.log('ticket', ticketDetails)
+
+    console.log(ticketDetails)
+
+
+    const getToday = () => {
+        const date = new Date()
+        const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
+        setTicketDetails({...ticketDetails,dropDate:today})
+    }
+    getToday()
 
 
     const removeItem = (index) => {
@@ -49,7 +57,6 @@ const CreateTicketForm = () => {
             }
             return item;
         });
-        //console.log(newItemList)
         setItemList(newItemList)
     }
 
@@ -59,23 +66,23 @@ const CreateTicketForm = () => {
         setItemList([...itemList, newItem])
     };
 
-    const setToCategory = (event) => {
-        setCategory(event.target.value)
-        //updateItemList(category, 'category')
-    }
+    // const setToCategory = (event) => {
+    //     setCategory(event.target.value)
+    //     //updateItemList(category, 'category')
+    // }
 
-    const SetToRepairs = (repair) => {
-        if (repair) { setRepairs(repairs.concat(repair)) }
-    }
+    // const SetToRepairs = (repair) => {
+    //     if (repair) { setRepairs(repairs.concat(repair)) }
+    // }
 
-    const setToItemName = (e, values) => {
-        setItemName(values)
-    }
+    // const setToItemName = (e, values) => {
+    //     setItemName(values)
+    // }
 
-    const handleDelete = (repairName) => () => {
-        const updatedRepairs = repairs.filter(repair => repair !== repairName)
-        setRepairs(updatedRepairs)
-    }
+    // const handleDelete = (repairName) => () => {
+    //     const updatedRepairs = repairs.filter(repair => repair !== repairName)
+    //     setRepairs(updatedRepairs)
+    // }
 
     const handleChange = e => {
         const name = e.target.name
@@ -85,29 +92,19 @@ const CreateTicketForm = () => {
             [name]: value,
 
         })
-        console.log(ticketDetails)
-
-    }
-
-    const repairChips = repairs?.map(repair => (
-        <Chip
-            size="small"
-            label={repair}
-            onDelete={handleDelete(repair)}
-        />
-    ))
+   }
 
     return (
         <Grid container>
-                <Grid container item xs={12} spacing={2}>
-                    {
-                        ticketDetails?.ticketItems?.map(item => (
-                            <Item key={item.id} id={item.id} handleChange={handleChange} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName} setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
+            <Grid container item xs={12} spacing={2}>
+                {
+                    ticketDetails?.ticketItems?.map(item => (
+                        <Item key={item.id} id={item.id} remove={removeItem} updateItemList={updateItemList} />
 
-                        ))
-                    }
-                </Grid>
-                <Grid item xs={12}>
+                    ))
+                }
+            </Grid>
+            <Grid item xs={12}>
                 <Container>
                     <Grid container className={classes.formWrapper}>
 
@@ -120,13 +117,13 @@ const CreateTicketForm = () => {
                 </Container>
             </Grid>
             <Grid item xs={12}>
-                <Container maxWidth='lg'>
-                    <Grid container className={classes.formWrapper} component={Paper}>
+                <Container maxWidth='md'>
+                    <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
                         <Grid item xs={6}>
                             <TextField label="Ticket Number" name='ticketNumber' fullWidth={true} value={ticketDetails.ticketNumber} onChange={handleChange} variant="outlined" />
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField label="Drop Date" name='dropDate' fullWidth={true} value={ticketDetails.dropDate} onChange={handleChange} variant="outlined" />
+                            <TextField label="Drop Date" name='dropDate' fullWidth={true} type='date' value={ticketDetails.dropDate} onChange={handleChange} variant="outlined" />
                         </Grid>
                         <Grid item xs={6}>
                             <TextField label="First Name" name='firstName' fullWidth={true} value={ticketDetails.firstName} onChange={handleChange} variant="outlined" />
@@ -138,7 +135,7 @@ const CreateTicketForm = () => {
                             <TextField label="Phone Number" name='phone' fullWidth={true} value={ticketDetails.phone} onChange={handleChange} variant="outlined" />
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField label="Pick Up Date" name='pickUpDate' fullWidth={true} value={ticketDetails.pickUpDate} onChange={handleChange} variant="outlined" />
+                            <TextField label="Pick Up Date" name='pickUpDate' InputLabelProps={{shrink:true}} fullWidth={true} type='date' value={ticketDetails.pickUpDate} onChange={handleChange} variant="outlined" />
                         </Grid>
                     </Grid>
                 </Container>

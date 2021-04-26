@@ -23,8 +23,10 @@ const useStyles = makeStyles(theme => ({
 const CustomerForm = ({next}) => {
 
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
-    const date = new Date()
-    const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
+     const date = new Date()
+     const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
+    console.log('date:', typeof today)
+    console.log(today)
     // const [firstName, setFirstName] = useState('')
     // const [lastName, setLastName] = useState('')
     // const [phone, setPhone] = useState('')
@@ -72,12 +74,12 @@ const CustomerForm = ({next}) => {
     // };
 
     const INITIAL_FORM_STATE = {
-        firstName: '',
-        lastName: '',
-        phone: '',
-        ticketNumber: '',
-        dropDate: today,
-        pickupDate: '',
+        firstName: ticketDetails.firstName,
+        lastName: ticketDetails.lastName,
+        phone: ticketDetails.phone,
+        ticketNumber: ticketDetails.ticketNumber,
+        dropDate: ticketDetails.dropDate,
+        pickupDate: ticketDetails.pickUpDate,
     };
 
     const FORM_VALIDATION = Yup.object().shape({

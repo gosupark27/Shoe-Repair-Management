@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Item = ({ id, remove, repairChips, updateItemList, setRepairs }) => {
+const Item = ({ id, remove, updateItemList }) => {
 
     const [ticketDetails] = useContext(TicketContext)
     const theme = useTheme()
@@ -197,9 +197,6 @@ const Item = ({ id, remove, repairChips, updateItemList, setRepairs }) => {
                             ))}
                         </Select>
                     </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    {repairChips}
                 </Grid>
             </Container>
         </Grid>

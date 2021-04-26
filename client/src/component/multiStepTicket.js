@@ -136,6 +136,10 @@ export default function CustomizedSteppers() {
     setActiveStep(0);
   };
 
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   return (
     <TicketProvider>
       <div className={classes.root}>
@@ -162,8 +166,11 @@ export default function CustomizedSteppers() {
             </div>
           ) : (
             <div className={classes.instructions}>
-              {getStepContent(activeStep, handleNext)}
+              {getStepContent(activeStep)}
               <div>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
                 <Button
                   variant="contained"
                   color="primary"
