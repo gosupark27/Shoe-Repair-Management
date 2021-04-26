@@ -1,10 +1,10 @@
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,6 +18,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from "@material-ui/core/Button"
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { TicketContext } from './Contexts/TicketContext'
+import Input from '@material-ui/core/Input';
+import Chip from '@material-ui/core/Chip';
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,26 +40,68 @@ const useStyles = makeStyles(theme => ({
     },
     formWrapper: {
         margin: theme.spacing(1),
-        padding:theme.spacing(3),
+        padding: theme.spacing(3),
+    },
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: 2,
     },
 }));
 
 
-const Item = ({ repairs, remove, repairChips, category, setCategory, item, updateItemList, setItem, setRepairs, setChip }) => {
+const Item = ({ id, remove, repairChips, updateItemList, setRepairs }) => {
 
-    const [itemSelect, setItemSelect] = useState('')
+    const [ticketDetails] = useContext(TicketContext)
+    const theme = useTheme()
     const classes = useStyles()
 
-    // const itemNameChange = (e) => {
-    //     const itemNameInput = e.target.value
-    //     setItemSelect(itemNameInput.substr(0, itemNameInput.indexOf(' ')))
-    //     updateItemList(item.id, itemNameInput, 'itemName');
-    // }
+    const itemNameChange = (e) => {
+        const value = e.target.value
+        updateItemList(id, value, 'itemName')
+    }
 
-    // const repairDescChange = (e) => {
-    //     const repairDescInput = e.target.value;
-    //     updateItemList(item.id, repairDescInput, 'repair');
-    // }
+    const categoryChange = (e) => {
+        console.log('category change called')
+        const value = e.target.value
+        updateItemList(id, value, 'category')
+
+    }
+
+    const repairChange = (e) => {
+        const value = e.target.value
+        updateItemList(id, value, 'repair')
+
+    }
+
+    const getItemName = (id) => {
+        const item = ticketDetails.ticketItems.filter(item => item.id === id)
+        if (item[0].itemName === "") {
+            return 'Select Item'
+        }
+        else
+            return item[0].itemName
+    }
+
+    const getCategory = (id) => {
+        const item = ticketDetails.ticketItems.filter(item => item.id === id)
+        if (item[0].category === "") {
+            return 'Select Category'
+        }
+        else
+            return item[0].category
+    }
+
+    const getRepair = (id) => {
+        const item = ticketDetails.ticketItems.filter(item => item.id === id)
+        return item[0].repair
+    }
+
+
+
+    const Category = [{ id: 1, name: 'Men' }, { id: 2, name: 'Women' }, { id: 3, name: 'Handbag' }, { id: 4, name: 'Luggage' }, { id: 5, name: 'Other' }]
 
     const MenItems = [{ id: 1, name: "Dress Shoe" }, { id: 2, name: "Cowboy Boots" }, { id: 3, name: "Sandals" }, { id: 4, name: "Sneakers" }, { id: 5, name: "Work boots" }, { id: 6, name: "Moccasin" }]
 
@@ -70,85 +116,92 @@ const Item = ({ repairs, remove, repairChips, category, setCategory, item, updat
     }
 
     let itemList = []
+    let repairOptions = []
+    let categorySelect = getCategory(id)
 
-    if (category.includes('Men')) { itemList = sortItems(MenItems) }
-    else if (category.includes('Women')) { itemList = sortItems(WomenItems) }
-    else if (category.includes('Handbag')) { itemList = sortItems(HandbagItems) }
-    //do we need an else statement here? 
-
-    // const itemList = {
-    //     Men: sortItems(MenItems),
-    //     Women: sortItems(WomenItems),
-    //     Handbag: sortItems(HandbagItems),
-    // };
+    if (categorySelect.includes('Men')) { itemList = sortItems(MenItems) }
+    else if (categorySelect.includes('Women')) { itemList = sortItems(WomenItems) }
+    else if (categorySelect.includes('Handbag')) { itemList = sortItems(HandbagItems) }
 
     const shoeRepairs = ['New Heels', 'Half Soles', 'Full Soles', 'Taps', 'Clean', 'Dye']
     const purseRepairs = ['New Strap', 'Strap Repair', 'New Zipper', 'Slider Repair', 'Replace Slider', 'Clean', 'Dye']
 
-    let repairOptions = []
-
-    if (category === 'Men' || category === 'Women') {
+    if (categorySelect === 'Men' || categorySelect === 'Women') {
         repairOptions = shoeRepairs.sort()
     }
-    else if (category === 'Handbag') {
+    else if (categorySelect === 'Handbag') {
         repairOptions = purseRepairs.sort()
     }
 
-    const createRepairChip = () => {
-
-    }
-
-    const handleRepairChange = (event, value) => {
-        setRepairs(value)
-    }
-
     return (
-        <Container component={Paper} className={classes.formWrapper}>
-            <Grid container item xs={12} style={{textAlign:'center'}}>
-                <FormControl component="fieldset" style={{margin:'auto'}}>
-                    <FormLabel component="legend">Category</FormLabel>
-                    <RadioGroup
-                        aria-label="Cateogry"
-                        name="Category"
-                        value={category}
-                        onChange={setCategory}
-                        row={true}
-                    >
-                        <FormControlLabel value="Men" control={<Radio />} label="Men" />
-                        <FormControlLabel value="Women" control={<Radio />} label="Women" />
-                        <FormControlLabel value="Handbag" control={<Radio />} label="Handbag" />
-                        <FormControlLabel value="Luggage" control={<Radio />} label="Luggage" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
-                </FormControl>
-            </Grid>
-            <Grid item xs={2}>
-                <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(item.id)} />
-            </Grid>
-            <Grid item xs={5}>
-                <Autocomplete
-                    options={itemList}
-                    getOptionLabel={(itemList) => itemList.name}
-                    getOptionSelected={(option, value) => option.name === value.name}
-                    style={{ width: 300 }}
-                    onChange={setItem}
-                    renderInput={(params) => <TextField {...params} label="Item Name" variant="outlined" />}
-                />
-            </Grid>
-            <Grid item xs={5}>
-                <Autocomplete
-                    options={repairOptions}
-                    getOptionLabel={(repair) => repair}
-                    getOptionSelected={(option, value) => option === value}
-                    style={{ width: 300 }}
-                    onChange={handleRepairChange}
-                    renderInput={(params) => <TextField {...params} label="Repair" variant="outlined" />}
-                />
-            </Grid>
-            <Grid item xs={12}>
-                {repairChips}
-            </Grid>
-        </Container>
+        <Grid item xs={4}>
+            <Container component={Paper} className={classes.formWrapper}>
+                <Grid item xs={12} style={{ textAlign: 'right' }}>
+                    <DeleteIcon data-testid="delIcon" style={{ color: 'black' }} onClick={() => remove(id)} />
+                </Grid>
+                <Grid container item xs={6}>
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value={getCategory(id)}
+                            onChange={categoryChange}
+                            displayEmpty={true}
+                            renderValue={() => getCategory(id)}
+                            className={classes.selectEmpty}
+
+                        >
+                            {Category.map(item =>
+                                <MenuItem key={item.id} value={item.name}>{item.name}</MenuItem>
+                            )}
+                        </Select>
+                        <FormHelperText>Category</FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value={[...getItemName(id)]}
+                            onChange={itemNameChange}
+                            displayEmpty={true}
+                            renderValue={() => getItemName(id)}
+                            className={classes.selectEmpty}
+                            inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                            {itemList?.map(item =>
+                                <MenuItem key={item.id} value={item.name}>{item.name}</MenuItem>
+                            )}
+                        </Select>
+                        <FormHelperText>Item Name</FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Repair</InputLabel>
+                        <Select
+                            multiple
+                            value={getRepair(id)}
+                            onChange={repairChange}
+                            input={<Input id="select-multiple-chip" />}
+                            renderValue={(selected) => (
+                                <div className={classes.chips}>
+                                    {selected.map((repair) => (
+                                        <Chip key={repair} label={repair} className={classes.chip} />
+                                    ))}
+                                </div>
+                            )}
+                        >
+                            {repairOptions?.map((repair) => (
+                                <MenuItem key={repair} value={repair}>
+                                    {repair}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                    {repairChips}
+                </Grid>
+            </Container>
+        </Grid>
     )
 }
 
