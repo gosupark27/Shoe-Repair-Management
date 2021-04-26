@@ -173,14 +173,15 @@ const Item = ({ id, remove, repairChips, updateItemList, setRepairs }) => {
                         <FormHelperText>Item Name</FormHelperText>
                     </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <FormControl className={classes.formControl}>
                         <InputLabel>Repair</InputLabel>
                         <Select
                             multiple
                             value={getRepair(id)}
+                            style={{width:'100%'}}
                             onChange={repairChange}
-                            input={<Input id="select-multiple-chip" />}
+                            input={<Input fullWidth={true}/>}
                             renderValue={(selected) => (
                                 <div className={classes.chips}>
                                     {selected.map((repair) => (

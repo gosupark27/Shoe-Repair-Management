@@ -99,8 +99,7 @@ const CreateTicketForm = () => {
 
     return (
         <Grid container>
-            <Grid item xs={12}>
-                <Grid item xs={12}>
+                <Grid container item xs={12} spacing={2}>
                     {
                         ticketDetails?.ticketItems?.map(item => (
                             <Item key={item.id} id={item.id} handleChange={handleChange} item={item} repairChips={repairChips} category={category} repairs={repairs} setRepairs={SetToRepairs} setItem={setToItemName} setCategory={setToCategory} remove={removeItem} updateItemList={updateItemList} />
@@ -108,6 +107,7 @@ const CreateTicketForm = () => {
                         ))
                     }
                 </Grid>
+                <Grid item xs={12}>
                 <Container>
                     <Grid container className={classes.formWrapper}>
 
