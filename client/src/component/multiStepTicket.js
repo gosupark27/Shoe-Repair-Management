@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import CreateTicketForm from './createTicketForm'
 import EditTicketForm from './editTicketForm'
-import { TicketProvider } from './Contexts/TicketContext'
+import { TicketProvider, TicketContext } from './Contexts/TicketContext'
 import { ItemListProvider } from './Contexts/ItemListContext'
 import TicketService from '../services/API'
 
@@ -128,14 +128,17 @@ function getStepContent(step, next) {
 export default function CustomizedSteppers() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+  const[ticketDetails, setTicketDetails] = useContext(TicketContext)
   const steps = getSteps();
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+  console.log(ticketDetails)
 
   const handleReset = () => {
     setActiveStep(0);
+    setTicketDetails('')
+
   };
 
   const handleBack = () => {
@@ -143,15 +146,14 @@ export default function CustomizedSteppers() {
   };
 
   const callApi = (values) => {
-    TicketService.create(values)
-        .then(savedTicket => {
+    // TicketService.create(values)
+    //     .then(savedTicket => {
             
-        })
+    //     })
+    handleNext()
 }
 
   return (
-    <TicketProvider>
-      <ItemListProvider>
         <div className={classes.root}>
           <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
             {steps.map((label) => (
@@ -191,7 +193,5 @@ export default function CustomizedSteppers() {
             )}
           </div>
         </div>
-      </ItemListProvider>
-    </TicketProvider>
   );
 }
