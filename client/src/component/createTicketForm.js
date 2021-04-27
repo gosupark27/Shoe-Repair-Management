@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import { v4 as uuidv4 } from 'uuid';
 import Item from './item';
-import Chip from "@material-ui/core/Chip"
 import Button from '@material-ui/core/Button';
 
 
@@ -22,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const CreateTicketForm = () => {
+
     const classes = useStyles()
     const [ticketDetails, setTicketDetails] = useContext(TicketContext)
     const [itemList, setItemList] = useContext(ItemListContext)
@@ -34,12 +34,6 @@ const CreateTicketForm = () => {
             return ticketDetails.ticketItems
     }
     
-
-    //const [itemList, setItemList] = useState(initialItem());
-    
-    // const [category, setCategory] = useState('')
-    // const [itemName, setItemName] = useState('')
-    // const [repairs, setRepairs] = useState([])
     useEffect(() => {
         setItemList(initialItem())
     },[])
@@ -49,16 +43,11 @@ const CreateTicketForm = () => {
         setTicketDetails({ ...ticketDetails, ticketItems: itemList, dropDate:today })
     }, [itemList])
 
-    console.log(ticketDetails)
-
-
-
     const getToday = () => {
         const date = new Date()
         const today = `${date.getFullYear()}-${((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))}-${((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))}`
         return today
     }
-
 
     const removeItem = (index) => {
         const newItemList = itemList.filter(item => item.id !== index);
@@ -85,24 +74,6 @@ const CreateTicketForm = () => {
         setItemList([...itemList, newItem])
     };
 
-    // const setToCategory = (event) => {
-    //     setCategory(event.target.value)
-    //     //updateItemList(category, 'category')
-    // }
-
-    // const SetToRepairs = (repair) => {
-    //     if (repair) { setRepairs(repairs.concat(repair)) }
-    // }
-
-    // const setToItemName = (e, values) => {
-    //     setItemName(values)
-    // }
-
-    // const handleDelete = (repairName) => () => {
-    //     const updatedRepairs = repairs.filter(repair => repair !== repairName)
-    //     setRepairs(updatedRepairs)
-    // }
-
     const handleChange = e => {
         const name = e.target.name
         const value = e.target.value
@@ -110,7 +81,6 @@ const CreateTicketForm = () => {
             ...ticketDetails,
             [name]: value,
         })
-        console.log(ticketDetails)
    }
 
     return (
@@ -119,14 +89,11 @@ const CreateTicketForm = () => {
                 {
                     ticketDetails.ticketItems?.map(item => (
                         <Item key={item.id} id={item.id} remove={removeItem} update={updateItemList}/>
-
-                    ))
-                }
+                ))}
             </Grid>
             <Grid item xs={12}>
                 <Container>
                     <Grid container className={classes.formWrapper}>
-
                         <Grid item xs={12} style={{ textAlign: "center" }}>
                             <Button color='primary' onClick={addItem} variant="contained">
                                 Add Item
@@ -161,7 +128,6 @@ const CreateTicketForm = () => {
             </Grid>
         </Grid>
     )
-
 }
 
 export default CreateTicketForm
