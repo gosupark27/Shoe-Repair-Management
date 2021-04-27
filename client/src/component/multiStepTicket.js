@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Create Ticket', 'Confirm Ticket Details', 'View Ticket'];
+  return ['Create Ticket', 'Confirm Ticket Details'];
 }
 
 function getStepContent(step, next) {
@@ -156,14 +156,11 @@ export default function CustomizedSteppers() {
             {activeStep === steps.length ? (
               <div>
                 <Typography className={classes.instructions}>
-                  All steps completed - you&apos;re finished
-            </Typography>
-                <Button color='primary' className={classes.button}>
-                  View Ticket
-            </Button>
-                <Button onClick={handleReset} className={classes.button}>
-                  Reset
-            </Button>
+                  Load {'<ViewTicket/> with newly created ticket at the top'}
+              </Typography>
+                <Button onClick={handleReset} variant='contained' color='primary' className={classes.button}>
+                  Create New Ticket
+                </Button>
 
               </div>
             ) : (
@@ -179,7 +176,7 @@ export default function CustomizedSteppers() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 2 ? 'Save Ticket' : 'Next'}
+                    {activeStep === steps.length -1 ? 'Save Ticket' : 'Next'}
                   </Button>
                 </div>
               </div>
