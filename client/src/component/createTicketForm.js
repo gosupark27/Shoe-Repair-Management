@@ -55,7 +55,6 @@ const CreateTicketForm = () => {
     }
 
     const updateItemList = (index, value, _prop) => {
-        console.log('id:', index)
         const newItemList = itemList.map((item) => {
             if (item.id === index) {
                 if (_prop === 'repair') {

@@ -11,8 +11,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import CreateTicketForm from './createTicketForm'
 import EditTicketForm from './editTicketForm'
-import { TicketProvider, TicketContext } from './Contexts/TicketContext'
-import { ItemListProvider } from './Contexts/ItemListContext'
+import { TicketContext } from './Contexts/TicketContext'
 import TicketService from '../services/API'
 
 const QontoConnector = withStyles({
@@ -133,7 +132,6 @@ export default function CustomizedSteppers() {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-  console.log(ticketDetails)
 
   const handleReset = () => {
     setActiveStep(0);
@@ -145,11 +143,8 @@ export default function CustomizedSteppers() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const callApi = (values) => {
-    // TicketService.create(values)
-    //     .then(savedTicket => {
-            
-    //     })
+  const callApi = () => {
+     TicketService.create(ticketDetails)
     handleNext()
 }
 
