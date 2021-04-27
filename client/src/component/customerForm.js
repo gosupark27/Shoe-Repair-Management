@@ -1,9 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import TicketService from '../services/API';
-//Delete
-import { useHistory } from 'react-router-dom'
 import { Formik, Form } from 'formik';
 import Container from '@material-ui/core/Container';
 import * as Yup from 'yup';
@@ -12,7 +9,6 @@ import Button from './FormsUI/Button/index'
 import DateTimePicker from './FormsUI/DateTimePicker/index'
 import Paper from '@material-ui/core/Paper';
 import {TicketContext} from './Contexts/TicketContext'
-import EditCustomerForm from './editCustomerForm'
 
 const useStyles = makeStyles(theme => ({
     formWrapper: {
@@ -24,52 +20,8 @@ const useStyles = makeStyles(theme => ({
 const CustomerForm = ({setShow}) => {
 
     const[ticketDetails, setTicketDetails] = useContext(TicketContext)
-     
-    // const [firstName, setFirstName] = useState('')
-    // const [lastName, setLastName] = useState('')
-    // const [phone, setPhone] = useState('')
-    // const [pickUpDate, setPickUpDate] = useState(date.toString())
-    // const [ticketNumber, setTicketNumber] = useState('')
-    // const [dropDate, setDropDate] = useState(date.toString())
-    //const [ticketItems, setTicketItems] = useState([])
 
     const classes = useStyles();
-
-    let history = useHistory()
-
-    // const setTicketItem = (itemList) => {
-    //     setTicketItems(itemList)
-    // }
-
-
-    //todo: Move this to editTicket?
-    const callApi = (values) => {
-        TicketService.create(values)
-            .then(savedTicket => {
-                return history.push("/edit", savedTicket)
-            })
-
-    }
-
-    // const INITIAL_FORM_STATE = {
-    //     firstName: '',
-    //     lastName: '',
-    //     phone: '',
-    //     ticketNumber: '',
-    //     dropDate: today,
-    //     pickupDate: '',
-    //     ticketItems:[],
-    //     'ticketItems.item':{
-    //         category:'',
-    //         itemName:'',
-    //         repairs:[],
-    //         tempId:'',
-    //     },
-    //     'ticketItems.item.repairs.repair':{
-    //         name:'',
-    //         price:'',
-    //     }
-    // };
 
     const INITIAL_FORM_STATE = {
         firstName: ticketDetails.firstName,
@@ -120,9 +72,6 @@ const CustomerForm = ({setShow}) => {
                             >
                                 <Form>
                                     <Grid container className={classes.formWrapper} component={Paper} spacing={2}>
-    
-    
-    
                                         <Grid item xs={6}>
                                             <Textfield name='ticketNumber' label='Ticket Number' />
                                         </Grid>
@@ -153,14 +102,12 @@ const CustomerForm = ({setShow}) => {
                                             </Button>
                                         </Grid>
                                 </Form>
-    
                             </Formik>
                         </div>
                     </Container>
                 </Grid>
             </Grid>
     )
-
 }
 
 export default CustomerForm

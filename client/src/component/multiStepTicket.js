@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Check from '@material-ui/icons/Check';
-import StepConnector from '@material-ui/core/StepConnector';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import CreateTicketForm from './createTicketForm';
-import EditTicketForm from './editTicketForm';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import clsx from 'clsx'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import Check from '@material-ui/icons/Check'
+import StepConnector from '@material-ui/core/StepConnector'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import CreateTicketForm from './createTicketForm'
+import EditTicketForm from './editTicketForm'
 import { TicketProvider } from './Contexts/TicketContext'
 import { ItemListProvider } from './Contexts/ItemListContext'
+import TicketService from '../services/API'
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -141,6 +142,13 @@ export default function CustomizedSteppers() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const callApi = (values) => {
+    TicketService.create(values)
+        .then(savedTicket => {
+            
+        })
+}
+
   return (
     <TicketProvider>
       <ItemListProvider>
@@ -173,7 +181,7 @@ export default function CustomizedSteppers() {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
+                    onClick={activeStep === steps.length -1 ? callApi : handleNext }
                     className={classes.button}
                   >
                     {activeStep === steps.length -1 ? 'Save Ticket' : 'Next'}
