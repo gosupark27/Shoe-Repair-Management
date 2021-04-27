@@ -143,7 +143,7 @@ export default function CustomizedSteppers() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const callApi = () => {
+  const saveTicket = () => {
      TicketService.create(ticketDetails)
     handleNext()
 }
@@ -178,7 +178,7 @@ export default function CustomizedSteppers() {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={activeStep === steps.length -1 ? callApi : handleNext }
+                    onClick={activeStep === steps.length -1 ? saveTicket : handleNext }
                     className={classes.button}
                   >
                     {activeStep === steps.length -1 ? 'Save Ticket' : 'Next'}
