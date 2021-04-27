@@ -1,16 +1,15 @@
-import React, { useContext, useState } from 'react'
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext } from 'react'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { TicketContext } from './Contexts/TicketContext'
 import CardHeader from '@material-ui/core/CardHeader';
-import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import { TicketContext } from './Contexts/TicketContext'
 
 const EditCustomerForm = ({setShow}) => {
-    // const savedTicket = useLocation().state
-    // console.log(savedTicket.ticketItems)
+
     const [ticketDetails] = useContext(TicketContext)
 
     return (
