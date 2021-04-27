@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid'
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
+import Item from './item'
 import { TicketContext } from './Contexts/TicketContext'
 import { ItemListContext } from './Contexts/ItemListContext'
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import { v4 as uuidv4 } from 'uuid';
-import Item from './item';
-import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles(theme => ({
