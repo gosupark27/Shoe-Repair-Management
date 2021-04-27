@@ -1,27 +1,17 @@
-import ListItem from '@material-ui/core/ListItem';
+import React, { useContext } from 'react'
+import Container from '@material-ui/core/Container';
+import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import { useState, useContext } from 'react'
+import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Select from '@material-ui/core/Select';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from '@material-ui/core/Divider';
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Button from "@material-ui/core/Button"
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import { TicketContext } from './Contexts/TicketContext'
-import Input from '@material-ui/core/Input';
-import Chip from '@material-ui/core/Chip';
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,9 +53,7 @@ const Item = ({ id, remove, update }) => {
     }
 
     const categoryChange = (e) => {
-        
         const value = e.target.value
-        console.log('category change called', value, 'id:', id)
         update(id, value, 'category')
 
     }
@@ -73,7 +61,6 @@ const Item = ({ id, remove, update }) => {
     const repairChange = (e) => {
         const value = e.target.value
         update(id, value, 'repair')
-
     }
 
     const getItemName = (id) => {
@@ -101,14 +88,47 @@ const Item = ({ id, remove, update }) => {
 
 
 
-    const Category = [{ id: 1, name: 'Men' }, { id: 2, name: 'Women' }, { id: 3, name: 'Handbag' }, { id: 4, name: 'Luggage' }, { id: 5, name: 'Other' }]
+    const Category = [
+        { id: 1, name: 'Men' }, 
+        { id: 2, name: 'Women' }, 
+        { id: 3, name: 'Handbag' }, 
+        { id: 4, name: 'Luggage' }, 
+        { id: 5, name: 'Other' }
+    ]
 
-    const MenItems = [{ id: 1, name: "Dress Shoe" }, { id: 2, name: "Cowboy Boots" }, { id: 3, name: "Sandals" }, { id: 4, name: "Sneakers" }, { id: 5, name: "Work boots" }, { id: 6, name: "Moccasin" }]
+    const MenItems = [
+        { id: 1, name: "Dress Shoe" }, 
+        { id: 2, name: "Cowboy Boots" }, 
+        { id: 3, name: "Sandals" }, 
+        { id: 4, name: "Sneakers" }, 
+        { id: 5, name: "Work boots" }, 
+        { id: 6, name: "Moccasin" }
+    ]
 
-    const WomenItems = [{ id: 1, name: "Platforms" }, { id: 2, name: "Sandals" }, { id: 3, name: "Slingbacks" }, { id: 4, name: "Pump" }, { id: 5, name: "Wedge" }, { id: 6, name: " Knee Boots" }, { id: 7, name: "Thigh High Boots" },
-    { id: 8, name: "Snow Boots" }, { id: 9, name: "Cowboy Boots" }, { id: 10, name: "Ankle Strap" }, { id: 11, name: "Moccasin" }]
+    const WomenItems = [
+        { id: 1, name: "Platforms" }, 
+        { id: 2, name: "Sandals" }, 
+        { id: 3, name: "Slingbacks" }, 
+        { id: 4, name: "Pump" }, 
+        { id: 5, name: "Wedge" }, 
+        { id: 6, name: " Knee Boots" }, 
+        { id: 7, name: "Thigh High Boots" },
+        { id: 8, name: "Snow Boots" }, 
+        { id: 9, name: "Cowboy Boots" }, 
+        { id: 10, name: "Ankle Strap" }, 
+        { id: 11, name: "Moccasin" }
+    ]
 
-    const HandbagItems = [{ id: 1, name: 'Shoulder Bags' }, { id: 2, name: "Tote Bags" }, { id: 3, name: "Crossbody Bags" }, { id: 4, name: "Satchels" }, { id: 5, name: "Clutch" }, { id: 6, name: "Bucket" }, { id: 7, name: "Messenger" }, { id: 8, name: "Hobo" }]
+    const HandbagItems = [
+        { id: 1, name: 'Shoulder Bags' }, 
+        { id: 2, name: "Tote Bags" }, 
+        { id: 3, name: "Crossbody Bags" }, 
+        { id: 4, name: "Satchels" }, 
+        { id: 5, name: "Clutch" }, 
+        { id: 6, name: "Bucket" }, 
+        { id: 7, name: "Messenger" }, 
+        { id: 8, name: "Hobo" }
+    ]
 
     const sortItems = (itemList) => {
         const sortedList = itemList.sort((a, b) => a.name.localeCompare(b.name))
@@ -199,7 +219,6 @@ const Item = ({ id, remove, update }) => {
                                     {repair}
                                 </MenuItem>
                             ))}
-                           
                         </Select>
                         <FormHelperText>Repair Name</FormHelperText>
                     </FormControl>
